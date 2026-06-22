@@ -555,11 +555,8 @@ const SISU_TEAM  = 48078;
 const SISU_AGENT = 225028;
 const SISU_BASE  = 'https://staging.sisu.co/api';
 
-// Two CORS proxies — try first, fallback to second
-const PROXIES = [
-  'https://api.allorigins.win/raw?url=',
-  'https://corsproxy.io/?',
-];
+// Internal proxy — routes through /api/proxy to avoid CORS restrictions
+const PROXY_BASE = '/api/proxy?url=';
 
 const USERS = {
   'adam@enchantaz.com':  { pass:'adam123',   role:'agent',      name:'Adam Prather', initials:'AP', title:'Agent / Broker', sisuId:225028 },
@@ -625,17 +622,11 @@ function initApp() {
 }
 
 // ─── PROXY FETCH ──────────────────────────────────────────────────────────────
-async function proxyFetch(url, opts={}, proxyIdx=0) {
-  if (proxyIdx >= PROXIES.length) throw new Error('All proxies failed');
-  try {
-    const proxyUrl = PROXIES[proxyIdx] + encodeURIComponent(url);
-    const r = await fetch(proxyUrl, opts);
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return r;
-  } catch(e) {
-    console.warn(`Proxy ${proxyIdx} failed, trying next:`, e.message);
-    return proxyFetch(url, opts, proxyIdx+1);
-  }
+async function proxyFetch(url, opts={}) {
+  const proxyUrl = PROXY_BASE + encodeURIComponent(url);
+  const r = await fetch(proxyUrl, opts);
+  if (!r.ok) throw new Error(`Proxy error ${r.status}`);
+  return r;
 }
 
 async function fubFetch(endpoint, params='') {
