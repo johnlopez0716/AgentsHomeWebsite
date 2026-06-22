@@ -8,178 +8,193 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --black:#0a0a08;
-  --green:#002803;
-  --green-mid:#004006;
-  --white:#ffffff;
-  --cream:#f7f5f0;
-  --gray:#9a9590;
-  --dark:#3a3835;
-  --border:#e0dbd3;
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'DM Sans',system-ui,sans-serif;
-  --sidebar:220px;
+  --black:#0a0a08;--green:#002803;--green-mid:#004006;--white:#ffffff;
+  --cream:#f7f5f0;--gray:#9a9590;--dark:#3a3835;--border:#e0dbd3;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  --sidebar:224px;
 }
-body{font-family:var(--sans);background:var(--cream);color:var(--black);min-height:100vh;display:flex;flex-direction:column}
- 
-/* LOGIN SCREEN */
-#login-screen{
-  position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:9999;
-}
-.login-box{background:var(--white);width:100%;max-width:420px;padding:48px 40px;border-radius:2px;}
-.login-logo{font-family:var(--serif);font-size:1.6rem;font-weight:400;letter-spacing:.08em;color:var(--black);margin-bottom:4px;}
-.login-sub{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:40px;}
-.login-label{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);margin-bottom:8px;display:block;}
-.login-input{width:100%;border:1px solid var(--border);padding:12px 14px;font-family:var(--sans);font-size:.9rem;color:var(--black);background:var(--cream);outline:none;margin-bottom:20px;border-radius:1px;}
-.login-input:focus{border-color:var(--green);}
-.login-btn{width:100%;background:var(--green);color:var(--white);border:none;padding:14px;font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;margin-top:4px;}
-.login-btn:hover{background:var(--green-mid);}
-.login-error{font-size:.8rem;color:#c0392b;margin-bottom:12px;display:none;}
-.login-hint{font-size:.75rem;color:var(--gray);margin-top:20px;line-height:1.6;}
-.role-select{display:flex;gap:8px;margin-bottom:24px;}
-.role-btn{flex:1;padding:9px;border:1px solid var(--border);background:var(--cream);font-family:var(--sans);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--dark);transition:all .2s;}
-.role-btn.active{background:var(--black);color:var(--white);border-color:var(--black);}
- 
-/* APP SHELL */
-#app{display:none;min-height:100vh;}
-.layout{display:flex;min-height:100vh;}
- 
+body{font-family:var(--sans);background:var(--cream);color:var(--black);min-height:100vh}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:var(--white);width:100%;max-width:420px;padding:48px 40px;border-radius:2px}
+.login-logo{font-family:var(--serif);font-size:1.65rem;font-weight:400;letter-spacing:.08em;color:var(--black);margin-bottom:3px}
+.login-sub{font-size:.63rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:34px}
+.login-label{font-size:.63rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);margin-bottom:8px;display:block}
+.login-input{width:100%;border:1px solid var(--border);padding:12px 14px;font-family:var(--sans);font-size:.88rem;color:var(--black);background:var(--cream);outline:none;margin-bottom:16px;border-radius:1px}
+.login-input:focus{border-color:var(--green)}
+.login-btn{width:100%;background:var(--green);color:var(--white);border:none;padding:14px;font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;margin-top:4px}
+.login-btn:hover{background:var(--green-mid)}
+.login-error{font-size:.78rem;color:#c0392b;margin-bottom:10px;display:none}
+.login-hint{font-size:.72rem;color:var(--gray);margin-top:16px;line-height:1.7;border-top:1px solid var(--border);padding-top:14px}
+.role-select{display:flex;gap:8px;margin-bottom:20px}
+.role-btn{flex:1;padding:9px;border:1px solid var(--border);background:var(--cream);font-family:var(--sans);font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--dark);transition:all .2s}
+.role-btn.active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+/* APP */
+#app{display:none;min-height:100vh}
+.layout{display:flex;min-height:100vh}
+
 /* SIDEBAR */
-.sidebar{
-  width:var(--sidebar);flex-shrink:0;background:var(--black);display:flex;flex-direction:column;
-  position:sticky;top:0;height:100vh;overflow-y:auto;
-}
-.sidebar-logo{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08);}
-.sidebar-logo-name{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--white);letter-spacing:.06em;}
-.sidebar-logo-tag{font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#002803;color:rgba(255,255,255,.35);margin-top:2px;}
-.sidebar-user{padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;}
-.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;color:var(--white);flex-shrink:0;}
-.user-name{font-size:.78rem;color:var(--white);font-weight:500;}
-.user-role{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
-.nav{padding:16px 0;flex:1;}
-.nav-section{padding:8px 24px 4px;font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 24px;font-size:.78rem;color:rgba(255,255,255,.55);cursor:pointer;transition:all .15s;border-left:2px solid transparent;}
-.nav-item:hover{color:var(--white);background:rgba(255,255,255,.04);}
-.nav-item.active{color:var(--white);border-left-color:var(--green-mid);background:rgba(0,40,3,.3);}
-.nav-item svg{width:15px;height:15px;flex-shrink:0;}
-.sidebar-footer{padding:16px 24px;border-top:1px solid rgba(255,255,255,.08);}
-.logout-btn{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;background:none;border:none;font-family:var(--sans);}
-.logout-btn:hover{color:rgba(255,255,255,.6);}
- 
+.sidebar{width:var(--sidebar);flex-shrink:0;background:var(--black);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar-logo{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.sidebar-logo-name{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--white);letter-spacing:.06em}
+.sidebar-logo-tag{font-size:.56rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:2px}
+.sidebar-user{padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:600;color:var(--white);flex-shrink:0}
+.user-name{font-size:.76rem;color:var(--white);font-weight:500}
+.user-role{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.nav{padding:12px 0;flex:1}
+.nav-section{padding:8px 20px 3px;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 20px;font-size:.75rem;color:rgba(255,255,255,.48);cursor:pointer;transition:all .15s;border-left:2px solid transparent;text-decoration:none}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,.04)}
+.nav-item.active{color:var(--white);border-left-color:#1a5c0f;background:rgba(0,40,3,.35)}
+.nav-item svg{width:14px;height:14px;flex-shrink:0}
+/* Agent Portal nav section highlight */
+.nav-portal{border-top:1px solid rgba(255,255,255,.07);margin-top:4px;padding-top:4px}
+.nav-portal-link{display:flex;align-items:center;gap:9px;padding:9px 20px;font-size:.75rem;color:rgba(255,255,255,.55);cursor:pointer;transition:all .15s;text-decoration:none;background:rgba(0,40,3,.15)}
+.nav-portal-link:hover{color:var(--white);background:rgba(0,40,3,.4)}
+.nav-portal-badge{font-size:.54rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--white);padding:1px 5px;margin-left:auto;border-radius:1px}
+.sidebar-footer{padding:13px 20px;border-top:1px solid rgba(255,255,255,.07)}
+.logout-btn{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.26);cursor:pointer;background:none;border:none;font-family:var(--sans)}
+.logout-btn:hover{color:rgba(255,255,255,.5)}
+
 /* MAIN */
-.main{flex:1;overflow:auto;}
-.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;}
-.page-title{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--black);}
-.topbar-right{display:flex;align-items:center;gap:16px;}
-.live-dot{display:flex;align-items:center;gap:6px;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);}
-.live-dot span{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.share-btn{background:var(--black);color:var(--white);border:none;padding:8px 18px;font-family:var(--sans);font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;}
-.share-btn:hover{background:var(--green);}
- 
+.main{flex:1;overflow:auto;min-width:0}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 26px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.page-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:var(--black)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.live-dot{display:flex;align-items:center;gap:5px;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+.live-dot span{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sync-btn{background:none;border:1px solid var(--border);padding:6px 12px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--dark);display:flex;align-items:center;gap:5px}
+.sync-btn:hover{border-color:var(--green);color:var(--green)}
+.share-btn{background:var(--black);color:var(--white);border:none;padding:7px 14px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.share-btn:hover{background:var(--green)}
+.date-filter{display:flex;border:1px solid var(--border);background:var(--white)}
+.df-btn{padding:6px 12px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--gray);background:none;border:none;border-right:1px solid var(--border)}
+.df-btn:last-child{border-right:none}
+.df-btn.active{background:var(--black);color:var(--white)}
+
+/* STATUS BAR */
+.status-bar{display:flex;align-items:center;gap:14px;background:var(--white);border-bottom:1px solid var(--border);padding:7px 26px;font-size:.66rem;color:var(--gray);flex-wrap:wrap}
+.status-item{display:flex;align-items:center;gap:5px}
+.status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dot-green{background:#27ae60}.dot-amber{background:#f39c12}.dot-gray{background:#ccc}.dot-red{background:#e74c3c}
+
 /* CONTENT */
-.content{padding:28px 32px;}
- 
-/* METRIC CARDS */
-.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px;}
-.metric-card{background:var(--white);border:1px solid var(--border);padding:20px 22px;}
-.metric-eyebrow{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;}
-.metric-value{font-family:var(--serif);font-size:2.1rem;font-weight:300;color:var(--black);line-height:1;}
-.metric-sub{font-size:.72rem;color:var(--gray);margin-top:6px;}
-.metric-delta{display:inline-block;font-size:.65rem;font-weight:600;padding:2px 7px;margin-top:6px;}
-.delta-up{background:#e8f5e2;color:#1a5c0f;}
-.delta-dn{background:#fce8e8;color:#8b1a1a;}
- 
+.content{padding:22px 26px}
+.section-eyebrow{font-size:.58rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.section-title{font-family:var(--serif);font-size:1.7rem;font-weight:400;color:var(--black);margin-bottom:16px}
+
+/* METRICS */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:18px}
+.metric-card{background:var(--white);border:1px solid var(--border);padding:16px 18px}
+.metric-eyebrow{font-size:.56rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-bottom:5px}
+.metric-value{font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--black);line-height:1}
+.metric-sub{font-size:.68rem;color:var(--gray);margin-top:4px}
+.metric-delta{display:inline-block;font-size:.6rem;font-weight:600;padding:2px 6px;margin-top:4px}
+.delta-up{background:#e8f5e2;color:#1a5c0f}
+.delta-dn{background:#fce8e8;color:#8b1a1a}
+
 /* CARDS */
-.card{background:var(--white);border:1px solid var(--border);padding:22px 24px;margin-bottom:16px;}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.card-title{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);}
-.card-source{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);background:var(--cream);padding:3px 8px;border:1px solid var(--border);}
- 
-/* TABLE ROWS */
-.data-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:.82rem;}
-.data-row:last-child{border-bottom:none;}
-.avatar{width:30px;height:30px;border-radius:50%;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:600;color:var(--dark);flex-shrink:0;}
-.row-main{flex:1;color:var(--black);font-weight:500;}
-.row-sub{font-size:.75rem;color:var(--gray);}
-.row-val{font-family:var(--serif);font-size:1rem;color:var(--black);}
- 
+.card{background:var(--white);border:1px solid var(--border);padding:18px 20px;margin-bottom:13px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;flex-wrap:wrap;gap:7px}
+.card-title{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dark)}
+.card-actions{display:flex;align-items:center;gap:7px}
+.card-source{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);background:var(--cream);padding:2px 7px;border:1px solid var(--border)}
+.ext-link{font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);text-decoration:none;padding:2px 8px;border:1px solid var(--green);white-space:nowrap}
+.ext-link:hover{background:var(--green);color:var(--white)}
+
+/* ROWS */
+.data-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:.78rem}
+.data-row:last-child{border-bottom:none}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:600;color:var(--dark);flex-shrink:0}
+.row-main{flex:1;color:var(--black);font-weight:500}
+.row-sub{font-size:.7rem;color:var(--gray)}
+.row-val{font-family:var(--serif);font-size:.92rem;color:var(--black)}
+
 /* BADGES */
-.badge{display:inline-block;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;}
-.b-green{background:#e8f5e2;color:#1a5c0f;}
-.b-amber{background:#fef3e2;color:#7a4a00;}
-.b-blue{background:#e8f0fe;color:#1a3a7a;}
-.b-red{background:#fce8e8;color:#8b1a1a;}
-.b-gray{background:var(--cream);color:var(--dark);border:1px solid var(--border);}
-.b-green-dark{background:var(--green);color:var(--white);}
- 
+.badge{display:inline-block;font-size:.57rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px}
+.b-green{background:#e8f5e2;color:#1a5c0f}
+.b-amber{background:#fef3e2;color:#7a4a00}
+.b-blue{background:#e8f0fe;color:#1a3a7a}
+.b-red{background:#fce8e8;color:#8b1a1a}
+.b-gray{background:var(--cream);color:var(--dark);border:1px solid var(--border)}
+.b-dark{background:var(--black);color:var(--white)}
+
 /* BAR */
-.bar-wrap{flex:1;background:var(--cream);height:4px;border-radius:2px;overflow:hidden;}
-.bar-fill{height:100%;background:var(--green);border-radius:2px;}
- 
+.bar-wrap{flex:1;background:var(--cream);height:3px;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:var(--green);border-radius:2px}
+
+/* ACTIVITY TILES */
+.activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px}
+.act-tile{background:var(--cream);border:1px solid var(--border);padding:13px 15px}
+.act-label{font-size:.56rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:3px}
+.act-val{font-family:var(--serif);font-size:1.65rem;font-weight:300;color:var(--black)}
+.act-source{font-size:.56rem;color:var(--gray);margin-top:2px}
+
+/* AGENT PORTAL CARD */
+.portal-card{background:var(--green);border:none;padding:20px 22px;margin-bottom:13px}
+.portal-card-title{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px}
+.portal-card-name{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--white);margin-bottom:12px}
+.portal-card-desc{font-size:.76rem;color:rgba(255,255,255,.7);margin-bottom:16px;line-height:1.6}
+.portal-open-btn{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--green);border:none;padding:10px 20px;font-family:var(--sans);font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.portal-open-btn:hover{background:var(--cream)}
+.portal-links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:14px}
+.portal-link-tile{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:12px 14px;text-decoration:none;transition:background .15s}
+.portal-link-tile:hover{background:rgba(255,255,255,.18)}
+.portal-link-label{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:3px}
+.portal-link-name{font-size:.82rem;font-weight:500;color:var(--white)}
+
 /* TWO COL */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
- 
-/* TABS */
-.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:24px;}
-.tab{padding:12px 18px;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--gray);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;}
-.tab:hover{color:var(--black);}
-.tab.active{color:var(--black);border-bottom-color:var(--green);}
- 
-/* PANELS */
-.panel{display:none;}
-.panel.active{display:block;}
- 
-/* SECTION HEADER */
-.section-eyebrow{font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:6px;}
-.section-title{font-family:var(--serif);font-size:1.8rem;font-weight:400;color:var(--black);margin-bottom:20px;}
- 
-/* PROGRESS RING */
-.progress-wrap{display:flex;align-items:center;gap:14px;}
-.progress-bar-outer{flex:1;height:6px;background:var(--cream);border-radius:3px;overflow:hidden;}
-.progress-bar-inner{height:100%;background:var(--green);border-radius:3px;}
- 
-/* MOBILE NAV */
-.mobile-nav-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;}
- 
-/* ALERT */
-.alert-banner{background:var(--green);color:var(--white);padding:10px 32px;font-size:.72rem;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
-.alert-close{background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:1rem;}
- 
-/* SHARE MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,8,.7);z-index:500;align-items:center;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal{background:var(--white);padding:36px;width:100%;max-width:460px;border-radius:2px;}
-.modal-title{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:6px;}
-.modal-sub{font-size:.78rem;color:var(--gray);margin-bottom:24px;}
-.link-box{background:var(--cream);border:1px solid var(--border);padding:12px 14px;font-size:.8rem;color:var(--dark);font-family:monospace;word-break:break-all;margin-bottom:12px;}
-.copy-btn{background:var(--black);color:var(--white);border:none;padding:10px 20px;font-family:var(--sans);font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;margin-right:8px;}
-.copy-btn:hover{background:var(--green);}
-.modal-close-btn{background:none;border:1px solid var(--border);padding:10px 20px;font-family:var(--sans);font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--dark);}
- 
-/* RESPONSIVE */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+
+/* PANEL */
+.panel{display:none}.panel.active{display:block}
+
+/* LOADING */
+.loading-text{font-size:.78rem;color:var(--gray);text-align:center;padding:20px;font-style:italic}
+.error-box{font-size:.76rem;color:#8b1a1a;padding:10px 13px;background:#fce8e8;border:1px solid #f5c6c6;margin-bottom:11px;line-height:1.5}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,8,.72);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);padding:32px;width:100%;max-width:420px;border-radius:2px}
+.modal-title{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin-bottom:4px}
+.modal-sub{font-size:.74rem;color:var(--gray);margin-bottom:18px}
+.link-box{background:var(--cream);border:1px solid var(--border);padding:9px 12px;font-size:.76rem;color:var(--dark);font-family:monospace;word-break:break-all;margin-bottom:10px}
+.copy-btn{background:var(--black);color:var(--white);border:none;padding:8px 16px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;margin-right:8px}
+.copy-btn:hover{background:var(--green)}
+.cancel-btn{background:none;border:1px solid var(--border);padding:8px 16px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--dark)}
+
+/* MOBILE */
+.mobile-nav-btn{display:none;background:none;border:none;cursor:pointer;padding:5px}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200}
 @media(max-width:768px){
-  .sidebar{position:fixed;left:-100%;top:0;height:100vh;z-index:300;transition:left .3s;}
-  .sidebar.open{left:0;}
-  .mobile-overlay.open{display:block;}
-  .mobile-nav-btn{display:flex;}
-  .content{padding:16px;}
-  .topbar{padding:0 16px;}
-  .two-col,.three-col{grid-template-columns:1fr;}
-  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .sidebar{position:fixed;left:-100%;top:0;height:100vh;z-index:300;transition:left .3s}
+  .sidebar.open{left:0}
+  .mobile-overlay.open{display:block}
+  .mobile-nav-btn{display:flex}
+  .content{padding:13px}
+  .topbar{padding:0 13px}
+  .two-col{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .activity-grid{grid-template-columns:1fr 1fr}
+  .portal-links-grid{grid-template-columns:1fr 1fr}
+  .topbar-right{gap:7px}
+  .date-filter{display:none}
 }
 </style>
 </head>
 <body>
- 
-<!-- LOGIN SCREEN -->
+
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">Enchant Real Estate Group</div>
     <div class="login-sub">Agent &amp; Leadership Portal</div>
-    <div style="margin-bottom:16px">
+    <div style="margin-bottom:14px">
       <div class="login-label">Sign in as</div>
       <div class="role-select">
         <button class="role-btn active" onclick="selectRole('agent',this)">Agent</button>
@@ -187,776 +202,710 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       </div>
     </div>
     <label class="login-label">Email address</label>
-    <input class="login-input" type="email" id="login-email" placeholder="you@enchantaz.com" autocomplete="email"/>
+    <input class="login-input" type="email" id="login-email" placeholder="you@enchantaz.com"/>
     <label class="login-label">Password</label>
-    <input class="login-input" type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+    <input class="login-input" type="password" id="login-pass" placeholder="••••••••"/>
     <div class="login-error" id="login-error">Incorrect email or password.</div>
     <button class="login-btn" onclick="doLogin()">Sign In</button>
     <div class="login-hint">
-      Demo — Agent: sarah@enchantaz.com / agent123<br>
-      Demo — Leadership: adam@enchantaz.com / leader123
+      Demo — Agent: adam@enchantaz.com / adam123<br>
+      Demo — Leadership: admin@enchantaz.com / leader123<br>
+      <span style="color:var(--green);font-weight:600">Live: FUB · SISU · Skyslope</span>
     </div>
   </div>
 </div>
- 
+
 <!-- APP -->
 <div id="app">
-  <div class="layout">
- 
-    <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-name">Enchant</div>
-        <div class="sidebar-logo-tag">Real Estate Group</div>
-      </div>
-      <div class="sidebar-user">
-        <div class="user-avatar" id="user-avatar">SK</div>
-        <div>
-          <div class="user-name" id="user-name">Sarah K.</div>
-          <div class="user-role" id="user-role">Agent</div>
-        </div>
-      </div>
-      <nav class="nav">
-        <div class="nav-section">Main</div>
-        <div class="nav-item active" onclick="showPanel('overview',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          Overview
-        </div>
-        <div class="nav-item" onclick="showPanel('pipeline',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-          Pipeline
-        </div>
-        <div class="nav-item" onclick="showPanel('calls',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2C7.613 21 3 16.387 3 7a2 2 0 012-2z"/></svg>
-          Calls
-        </div>
-        <div class="nav-item" onclick="showPanel('transactions',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-          Transactions
-        </div>
-        <div class="nav-item leadership-only" onclick="showPanel('team',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          Team
-        </div>
-        <div class="nav-section">Tools</div>
-        <div class="nav-item" onclick="showPanel('reports',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          Reports
-        </div>
-        <div class="nav-item" onclick="showPanel('settings',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-          Settings
-        </div>
-      </nav>
-      <div class="sidebar-footer">
-        <button class="logout-btn" onclick="doLogout()">Sign out</button>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-name">Enchant</div>
+    <div class="sidebar-logo-tag">Real Estate Group</div>
+  </div>
+  <div class="sidebar-user">
+    <div class="user-avatar" id="user-avatar">AP</div>
+    <div>
+      <div class="user-name" id="user-name">Adam Prather</div>
+      <div class="user-role" id="user-role-label">Agent / Broker</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-section">Dashboard</div>
+    <div class="nav-item active" onclick="showPanel('overview',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Overview
+    </div>
+    <div class="nav-item" onclick="showPanel('activity',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Activity
+    </div>
+    <div class="nav-item" onclick="showPanel('pipeline',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      Pipeline
+    </div>
+    <div class="nav-item" onclick="showPanel('transactions',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Transactions
+    </div>
+    <div class="nav-item leadership-only" onclick="showPanel('team',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Team
+    </div>
+    <div class="nav-item" onclick="showPanel('reports',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      Reports
+    </div>
+
+    <div class="nav-section" style="margin-top:8px">Platforms</div>
+    <a class="nav-item" href="https://app.followupboss.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      Follow Up Boss
+    </a>
+    <a class="nav-item" href="https://app.sisu.co" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      SISU
+    </a>
+    <a class="nav-item" href="https://app.skyslope.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      Skyslope
+    </a>
+    <a class="nav-item" href="https://app.mojo.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      Mojo Dialer
+    </a>
+    <a class="nav-item" href="https://desertlivingnow.com" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      IDX Search
+    </a>
+
+    <!-- AGENT PORTAL SECTION -->
+    <div class="nav-portal">
+      <div class="nav-section" style="padding-top:12px">Agent Portal</div>
+      <a class="nav-portal-link" href="https://go.adampratherlive.com/agent-portal" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Open Agent Portal
+        <span class="nav-portal-badge">Go</span>
+      </a>
+      <div class="nav-item" onclick="showPanel('portal',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        Portal Overview
       </div>
     </div>
- 
-    <!-- MOBILE OVERLAY -->
-    <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileNav()"></div>
- 
-    <!-- MAIN CONTENT -->
-    <div class="main">
- 
-      <!-- ALERT BANNER -->
-      <div class="alert-banner" id="alert-banner">
-        <span>2 transactions require document review — Skyslope compliance pending</span>
-        <button class="alert-close" onclick="document.getElementById('alert-banner').style.display='none'">×</button>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="logout-btn" onclick="doLogout()">Sign out</button>
+  </div>
+</div>
+
+<div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileNav()"></div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <div class="status-item"><div class="status-dot dot-gray" id="fub-dot"></div><span id="fub-status">FUB — connecting</span></div>
+    <div class="status-item"><div class="status-dot dot-gray" id="sisu-dot"></div><span id="sisu-status">SISU — connecting</span></div>
+    <div class="status-item"><div class="status-dot dot-amber" id="sky-dot"></div><span id="sky-status">Skyslope — backend needed</span></div>
+    <div style="margin-left:auto;font-size:.6rem" id="last-sync">Last sync: —</div>
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:11px">
+      <button class="mobile-nav-btn" onclick="openMobileNav()">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <div class="page-title" id="page-title">Overview</div>
+    </div>
+    <div class="topbar-right">
+      <div class="date-filter">
+        <button class="df-btn" onclick="setRange('week',this)">Week</button>
+        <button class="df-btn active" onclick="setRange('month',this)">Month</button>
+        <button class="df-btn" onclick="setRange('ytd',this)">YTD</button>
       </div>
- 
-      <!-- TOPBAR -->
-      <div class="topbar">
-        <div style="display:flex;align-items:center;gap:14px">
-          <button class="mobile-nav-btn" onclick="openMobileNav()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-          </button>
-          <div class="page-title" id="page-title">Overview</div>
+      <div class="live-dot"><span></span>Live</div>
+      <button class="sync-btn" onclick="syncAll()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.37"/></svg>
+        Refresh
+      </button>
+      <button class="share-btn" onclick="openModal()">Share</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- OVERVIEW -->
+    <div class="panel active" id="panel-overview">
+      <div class="section-eyebrow" id="ov-period">June 2026</div>
+      <div class="section-title" id="ov-greeting">Good morning, Adam</div>
+      <div class="metrics-grid" id="ov-metrics">
+        <div class="metric-card"><div class="metric-eyebrow">GCI</div><div class="metric-value" style="color:var(--border)">—</div><div class="metric-sub">SISU loading</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Pipeline</div><div class="metric-value" style="color:var(--border)">—</div><div class="metric-sub">FUB loading</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Closings</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Leads (FUB)</div><div class="metric-value" style="color:var(--border)">—</div></div>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Active pipeline</div>
+            <div class="card-actions"><span class="card-source">FUB</span><a class="ext-link" href="https://app.followupboss.com/2/pipeline" target="_blank">Open FUB ↗</a></div>
+          </div>
+          <div id="ov-pipeline"><div class="loading-text">Connecting to FUB…</div></div>
         </div>
-        <div class="topbar-right">
-          <div class="live-dot"><span></span>Live</div>
-          <button class="share-btn" onclick="openShareModal()">Share Report</button>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Recent activity</div>
+            <div class="card-actions"><span class="card-source">SISU</span><a class="ext-link" href="https://app.sisu.co" target="_blank">Open SISU ↗</a></div>
+          </div>
+          <div id="ov-activity"><div class="loading-text">Connecting to SISU…</div></div>
         </div>
       </div>
- 
-      <!-- CONTENT AREA -->
-      <div class="content">
- 
-        <!-- OVERVIEW PANEL -->
-        <div class="panel active" id="panel-overview">
-          <div class="section-eyebrow">June 2026</div>
-          <div class="section-title" id="overview-greeting">Good morning, Sarah</div>
- 
-          <div class="metrics-grid" id="overview-metrics"></div>
- 
-          <div class="two-col">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">My active pipeline</div>
-                <span class="card-source">FUB</span>
-              </div>
-              <div id="my-pipeline-rows"></div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Upcoming closings</div>
-                <span class="card-source">Skyslope</span>
-              </div>
-              <div id="closing-rows"></div>
-            </div>
-          </div>
- 
-          <!-- Leadership only: team bar chart -->
-          <div class="card leadership-only" id="team-gci-card">
-            <div class="card-header">
-              <div class="card-title">Team GCI — June 2026</div>
-              <span class="card-source">SISU</span>
-            </div>
-            <div id="team-gci-rows"></div>
-          </div>
+    </div>
+
+    <!-- ACTIVITY -->
+    <div class="panel" id="panel-activity">
+      <div class="section-eyebrow" id="act-period">June 2026</div>
+      <div class="section-title">Activity Tracker</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+        <div style="font-size:.74rem;color:var(--gray)">Live from SISU · agent_id <strong style="color:var(--dark)">225028</strong> · team_id <strong style="color:var(--dark)">48078</strong></div>
+        <a class="ext-link" href="https://app.sisu.co" target="_blank">Open SISU ↗</a>
+      </div>
+      <div class="activity-grid" id="act-tiles"><div class="loading-text" style="grid-column:1/-1">Connecting to SISU…</div></div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Activity log</div><span class="card-source">SISU</span></div>
+        <div id="act-detail"><div class="loading-text">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="panel" id="panel-pipeline">
+      <div class="section-eyebrow" id="pipe-period">June 2026</div>
+      <div class="section-title">Pipeline</div>
+      <div class="metrics-grid" id="pipe-metrics">
+        <div class="metric-card"><div class="metric-eyebrow">Total value</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Active deals</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Under contract</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">New leads 7d</div><div class="metric-value" style="color:var(--border)">—</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Deals</div>
+          <div class="card-actions"><span class="card-source">FUB</span><a class="ext-link" href="https://app.followupboss.com/2/pipeline" target="_blank">Open FUB ↗</a></div>
         </div>
- 
-        <!-- PIPELINE PANEL -->
-        <div class="panel" id="panel-pipeline">
-          <div class="metrics-grid" id="pipeline-metrics"></div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Active deals</div>
-              <span class="card-source">FUB + Skyslope</span>
-            </div>
-            <div id="pipeline-rows"></div>
-          </div>
+        <div id="pipe-deals"><div class="loading-text">Connecting to FUB…</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Leads — smart filter</div>
+          <div class="card-actions"><span class="card-source">FUB</span></div>
         </div>
- 
-        <!-- CALLS PANEL -->
-        <div class="panel" id="panel-calls">
-          <div class="metrics-grid" id="calls-metrics"></div>
-          <div class="two-col">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Call log — today</div>
-                <span class="card-source">Mojo</span>
-              </div>
-              <div id="call-log-rows"></div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Appointments set</div>
-                <span class="card-source">FUB</span>
-              </div>
-              <div id="appt-rows"></div>
-            </div>
-          </div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px">
+          <button class="df-btn active" style="border:1px solid var(--border)" onclick="filterLeads('all',this)">All</button>
+          <button class="df-btn" style="border:1px solid var(--border)" onclick="filterLeads('hot',this)">Hot</button>
+          <button class="df-btn" style="border:1px solid var(--border)" onclick="filterLeads('warm',this)">Warm</button>
+          <button class="df-btn" style="border:1px solid var(--border)" onclick="filterLeads('new',this)">New 7d</button>
+          <button class="df-btn" style="border:1px solid var(--border)" onclick="filterLeads('uncontacted',this)">Uncontacted</button>
         </div>
- 
-        <!-- TRANSACTIONS PANEL -->
-        <div class="panel" id="panel-transactions">
-          <div class="metrics-grid" id="tx-metrics"></div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Transaction log</div>
-              <span class="card-source">Skyslope</span>
-            </div>
-            <div id="tx-rows"></div>
-          </div>
+        <div id="pipe-leads"><div class="loading-text">Connecting to FUB…</div></div>
+      </div>
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <div class="panel" id="panel-transactions">
+      <div class="section-eyebrow" id="tx-period">June 2026</div>
+      <div class="section-title">Transactions</div>
+      <div class="metrics-grid" id="tx-metrics">
+        <div class="metric-card"><div class="metric-eyebrow">Closed volume</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">GCI earned</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Closed deals</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Avg sale price</div><div class="metric-value" style="color:var(--border)">—</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Transaction log</div>
+          <div class="card-actions"><span class="card-source">SISU + Skyslope</span><a class="ext-link" href="https://app.skyslope.com" target="_blank">Open Skyslope ↗</a></div>
         </div>
- 
-        <!-- TEAM PANEL (leadership only) -->
-        <div class="panel" id="panel-team">
-          <div class="metrics-grid" id="team-metrics"></div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Agent scorecard — June 2026</div>
-              <span class="card-source">SISU + FUB + Skyslope</span>
-            </div>
-            <div style="overflow-x:auto">
-              <table style="width:100%;border-collapse:collapse;font-size:.8rem;" id="scorecard-table">
-                <thead>
-                  <tr style="border-bottom:2px solid var(--border);">
-                    <th style="text-align:left;padding:8px 12px 8px 0;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);">Agent</th>
-                    <th style="text-align:right;padding:8px 8px;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);">GCI</th>
-                    <th style="text-align:right;padding:8px 8px;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);">Deals</th>
-                    <th style="text-align:right;padding:8px 8px;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);">Calls</th>
-                    <th style="text-align:right;padding:8px 8px;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);">Volume</th>
-                    <th style="text-align:center;padding:8px 0;font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="scorecard-body"></tbody>
-              </table>
-            </div>
-          </div>
+        <div id="tx-rows"><div class="loading-text">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="panel" id="panel-team">
+      <div class="section-eyebrow">Team</div>
+      <div class="section-title">Team Performance</div>
+      <div class="metrics-grid" id="team-metrics">
+        <div class="metric-card"><div class="metric-eyebrow">Team GCI</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Active agents</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Team volume</div><div class="metric-value" style="color:var(--border)">—</div></div>
+        <div class="metric-card"><div class="metric-eyebrow">Avg per agent</div><div class="metric-value" style="color:var(--border)">—</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Agent leaderboard</div>
+          <div class="card-actions"><span class="card-source">SISU</span><a class="ext-link" href="https://app.sisu.co" target="_blank">Open SISU ↗</a></div>
         </div>
- 
-        <!-- REPORTS PANEL -->
-        <div class="panel" id="panel-reports">
-          <div class="metrics-grid" id="reports-metrics"></div>
-          <div class="two-col">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Live shareable reports</div>
-              </div>
-              <div id="report-rows"></div>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Recent activity</div>
-              </div>
-              <div id="activity-rows"></div>
-            </div>
-          </div>
+        <div id="team-board"><div class="loading-text">Loading SISU leaderboard…</div></div>
+      </div>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="panel" id="panel-reports">
+      <div class="section-eyebrow">Reports</div>
+      <div class="section-title">Live Reports</div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Shareable report links</div></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">Monthly GCI summary</div><div class="row-sub">Updates live · SISU</div></div><span class="badge b-dark" style="margin-right:8px">Live</span><button class="cancel-btn" style="font-size:.58rem;padding:3px 9px" onclick="openModal()">Copy</button></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">Activity report</div><div class="row-sub">SISU data</div></div><span class="badge b-dark" style="margin-right:8px">Live</span><button class="cancel-btn" style="font-size:.58rem;padding:3px 9px" onclick="openModal()">Copy</button></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">Pipeline snapshot</div><div class="row-sub">FUB data</div></div><span class="badge b-dark" style="margin-right:8px">Live</span><button class="cancel-btn" style="font-size:.58rem;padding:3px 9px" onclick="openModal()">Copy</button></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">Transaction log Q2</div><div class="row-sub">Skyslope + SISU</div></div><span class="badge b-gray" style="margin-right:8px">Static</span><button class="cancel-btn" style="font-size:.58rem;padding:3px 9px" onclick="openModal()">Copy</button></div>
         </div>
- 
-        <!-- SETTINGS PANEL -->
-        <div class="panel" id="panel-settings">
-          <div class="section-eyebrow">Account</div>
-          <div class="section-title">Settings</div>
-          <div class="two-col">
-            <div class="card">
-              <div class="card-header"><div class="card-title">Profile</div></div>
-              <div class="data-row">
-                <div style="flex:1">
-                  <div class="row-main" id="settings-name">Sarah K.</div>
-                  <div class="row-sub" id="settings-email">sarah@enchantaz.com</div>
-                </div>
-                <span class="badge b-green" id="settings-role-badge">Agent</span>
-              </div>
-              <div style="margin-top:16px">
-                <div class="login-label">Display name</div>
-                <input class="login-input" id="settings-name-input" placeholder="Your name" style="margin-bottom:0"/>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header"><div class="card-title">Integrations</div></div>
-              <div class="data-row"><div class="row-main">Follow Up Boss</div><span class="badge b-green">Connected</span></div>
-              <div class="data-row"><div class="row-main">Skyslope</div><span class="badge b-green">Connected</span></div>
-              <div class="data-row"><div class="row-main">SISU</div><span class="badge b-amber">Verify plan</span></div>
-              <div class="data-row"><div class="row-main">Mojo</div><span class="badge b-gray">Pending</span></div>
-              <div class="data-row"><div class="row-main">Sierra</div><span class="badge b-gray">Pending</span></div>
-            </div>
-          </div>
-          <div class="card leadership-only" style="margin-top:0">
-            <div class="card-header"><div class="card-title">User management</div></div>
-            <div id="user-mgmt-rows"></div>
-            <button class="share-btn" style="margin-top:16px;font-size:.65rem;padding:10px 20px" onclick="alert('Invite link copied! Send to new agent.')">+ Invite Agent</button>
-          </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Platform links</div></div>
+          <div class="data-row"><div class="row-main">Follow Up Boss</div><a class="ext-link" href="https://app.followupboss.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">SISU</div><a class="ext-link" href="https://app.sisu.co" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Skyslope</div><a class="ext-link" href="https://app.skyslope.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Mojo Dialer</div><a class="ext-link" href="https://app.mojo.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">IDX Search — desertlivingnow.com</div><a class="ext-link" href="https://desertlivingnow.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">enchantaz.com</div><a class="ext-link" href="https://enchantaz.com" target="_blank">Open ↗</a></div>
         </div>
- 
-      </div><!-- /content -->
-    </div><!-- /main -->
-  </div><!-- /layout -->
+      </div>
+    </div>
+
+    <!-- AGENT PORTAL PANEL -->
+    <div class="panel" id="panel-portal">
+      <div class="section-eyebrow">Agent Resources</div>
+      <div class="section-title">Agent Portal</div>
+
+      <div class="portal-card">
+        <div class="portal-card-title">Enchant Real Estate Group</div>
+        <div class="portal-card-name">Agent Portal</div>
+        <div class="portal-card-desc">Submit new listings, buyer intakes, open house requests, and access all agent tools in one place.</div>
+        <a class="portal-open-btn" href="https://go.adampratherlive.com/agent-portal" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          Open Agent Portal
+        </a>
+        <div class="portal-links-grid">
+          <a class="portal-link-tile" href="https://go.adampratherlive.com/agent-portal" target="_blank" rel="noopener">
+            <div class="portal-link-label">Listings</div>
+            <div class="portal-link-name">Submit New Listing</div>
+          </a>
+          <a class="portal-link-tile" href="https://go.adampratherlive.com/agent-portal" target="_blank" rel="noopener">
+            <div class="portal-link-label">Buyers</div>
+            <div class="portal-link-name">Submit New Buyer</div>
+          </a>
+          <a class="portal-link-tile" href="https://go.adampratherlive.com/agent-portal" target="_blank" rel="noopener">
+            <div class="portal-link-label">Events</div>
+            <div class="portal-link-name">Schedule Open House</div>
+          </a>
+          <a class="portal-link-tile" href="https://go.adampratherlive.com/agent-portal" target="_blank" rel="noopener">
+            <div class="portal-link-label">Support</div>
+            <div class="portal-link-name">Submit a Ticket</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Key resources</div></div>
+          <div class="data-row"><div class="row-main">enchantaz.com</div><a class="ext-link" href="https://enchantaz.com" target="_blank">Visit ↗</a></div>
+          <div class="data-row"><div class="row-main">IDX Property Search</div><a class="ext-link" href="https://desertlivingnow.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">SISU Dashboard</div><a class="ext-link" href="https://app.sisu.co" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Follow Up Boss CRM</div><a class="ext-link" href="https://app.followupboss.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Skyslope Transactions</div><a class="ext-link" href="https://app.skyslope.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Mojo Dialer</div><a class="ext-link" href="https://app.mojo.com" target="_blank">Open ↗</a></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Contact</div></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">Adam Prather</div><div class="row-sub">Broker / Owner</div></div></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">adam.prather@enchantaz.com</div></div></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">(480) 725-4460</div></div></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">9221 E Via De Ventura</div><div class="row-sub">Scottsdale, AZ 85258</div></div></div>
+          <div class="data-row"><div style="flex:1"><div class="row-main">License # SA659490000</div><div class="row-sub">eXp Realty</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /layout -->
 </div><!-- /app -->
- 
+
 <!-- SHARE MODAL -->
 <div class="modal-overlay" id="share-modal">
   <div class="modal">
     <div class="modal-title">Share live report</div>
     <div class="modal-sub">Anyone with this link sees live data. No login required.</div>
-    <div class="link-box" id="share-link-url">https://enchant-dashboard.replit.app/report/live?t=abc123xyz</div>
+    <div class="link-box">https://enchant-dashboard.replit.app/r/<span id="share-token">enc_abc123</span></div>
     <button class="copy-btn" onclick="copyLink()">Copy Link</button>
-    <button class="modal-close-btn" onclick="closeShareModal()">Close</button>
-    <div style="margin-top:20px;font-size:.72rem;color:var(--gray);line-height:1.6;">
-      Link expires in 7 days. Create a permanent link from the Reports tab.
-    </div>
+    <button class="cancel-btn" onclick="closeModal()">Close</button>
+    <div style="margin-top:14px;font-size:.68rem;color:var(--gray);line-height:1.65">Expires in 7 days · Manage links in Reports tab</div>
   </div>
 </div>
- 
+
 <script>
-// ─── DATA ───────────────────────────────────────────────────────────────────
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
+const FUB_KEY   = 'fka_11u52bP3XxJbxh8d2QAXShXzyxs9e9Ht3L';
+const SISU_AUTH = 'Basic ZXhwLWVuY2hhbnQtcmVhbC1lc3RhdGUtZ3JvdXAtNDgwNzg6ZWU2YjQ4ODgtMTdjZC00NmJjLWI1YzgtODMwZGE0ZDhiYzM4';
+const SISU_TEAM  = 48078;
+const SISU_AGENT = 225028;
+const SISU_BASE  = 'https://staging.sisu.co/api';
+
+// Two CORS proxies — try first, fallback to second
+const PROXIES = [
+  'https://api.allorigins.win/raw?url=',
+  'https://corsproxy.io/?',
+];
+
 const USERS = {
-  'sarah@enchantaz.com': { pass:'agent123', role:'agent', name:'Sarah Kowalski', initials:'SK', title:'Agent' },
-  'adam@enchantaz.com':  { pass:'leader123', role:'leadership', name:'Adam Prather', initials:'AP', title:'Broker / Owner' },
+  'adam@enchantaz.com':  { pass:'adam123',   role:'agent',      name:'Adam Prather', initials:'AP', title:'Agent / Broker', sisuId:225028 },
+  'admin@enchantaz.com': { pass:'leader123', role:'leadership', name:'Adam Prather', initials:'AP', title:'Broker / Owner',  sisuId:225028 },
 };
- 
-const AGENTS = [
-  { name:'Sarah Kowalski', initials:'SK', gci:48200, deals:5, calls:127, volume:2410000, goal:50000, status:'on-track' },
-  { name:'James Morrison', initials:'JM', gci:38400, deals:4, calls:98,  volume:1920000, goal:45000, status:'on-track' },
-  { name:'Priya Lawson',   initials:'PL', gci:29100, deals:3, calls:84,  volume:1455000, goal:40000, status:'behind'   },
-  { name:'Carlos Reyes',  initials:'CR', gci:19800, deals:2, calls:76,  volume:990000,  goal:35000, status:'behind'   },
-  { name:'Brittney Engel',initials:'BE', gci:22500, deals:3, calls:61,  volume:1125000, goal:30000, status:'on-track' },
-  { name:'Nolan LaF.',    initials:'NL', gci:15200, deals:2, calls:55,  volume:760000,  goal:25000, status:'on-track' },
-];
- 
-const PIPELINE = [
-  { address:'12 Oak Street',       agent:'SK', price:425000, stage:'Under contract', days:14, source:'FUB' },
-  { address:'47 Maple Avenue',     agent:'JM', price:610000, stage:'Pending docs',   days:22, source:'Skyslope' },
-  { address:'8 River Road',        agent:'PL', price:380000, stage:'Clear to close', days:3,  source:'Skyslope' },
-  { address:'90 Sunset Boulevard', agent:'CR', price:525000, stage:'Under contract', days:9,  source:'FUB' },
-  { address:'15 Pine Street',      agent:'SK', price:290000, stage:'Active buyer',   days:5,  source:'FUB' },
-  { address:'32 Valley Drive',     agent:'JM', price:740000, stage:'Pending docs',   days:18, source:'Skyslope' },
-  { address:'201 Birch Lane',      agent:'BE', price:460000, stage:'Under contract', days:11, source:'FUB' },
-];
- 
-const TRANSACTIONS = [
-  { address:'102 Cedar Avenue',   agent:'SK', price:510000, closed:'Jun 12', status:'Closed',        docs:'Complete' },
-  { address:'77 Hillcrest Drive', agent:'JM', price:390000, closed:'Jun 8',  status:'Closed',        docs:'Complete' },
-  { address:'5 Lakeview Court',   agent:'PL', price:625000, closed:'Jun 15', status:'Docs pending',  docs:'Pending'  },
-  { address:'28 Orchard Road',    agent:'SK', price:445000, closed:'Jun 5',  status:'Closed',        docs:'Complete' },
-  { address:'14 Brook Street',    agent:'CR', price:330000, closed:'Jun 3',  status:'Closed',        docs:'Complete' },
-  { address:'55 Ridgewood Ct',    agent:'BE', price:480000, closed:'Jun 18', status:'Docs pending',  docs:'Pending'  },
-];
- 
-const CALLS_TODAY = [
-  { time:'9:02 AM',  contact:'Mike Dawson',     result:'Voicemail',  agent:'SK' },
-  { time:'9:18 AM',  contact:'Rachel Torres',   result:'Connected',  agent:'SK' },
-  { time:'9:45 AM',  contact:'Daniel Kim',      result:'Connected',  agent:'SK' },
-  { time:'10:11 AM', contact:'Susan Howell',    result:'Voicemail',  agent:'SK' },
-  { time:'10:33 AM', contact:'Greg Patel',      result:'No answer',  agent:'SK' },
-  { time:'11:02 AM', contact:'Linda Morris',    result:'Connected',  agent:'SK' },
-  { time:'11:20 AM', contact:'Tom Crawford',    result:'Callback',   agent:'SK' },
-];
- 
-const APPTS = [
-  { date:'Jun 23', time:'10:00 AM', name:'Rachel Torres',  type:'Buyer consult',  source:'FUB' },
-  { date:'Jun 24', time:'2:00 PM',  name:'Daniel Kim',     type:'Listing appt',   source:'FUB' },
-  { date:'Jun 26', time:'11:00 AM', name:'Linda Morris',   type:'Showing tour',   source:'FUB' },
-];
- 
-const REPORTS_LIST = [
-  { name:'Monthly GCI summary',     live:true,  views:14 },
-  { name:'Agent scorecard — June',  live:true,  views:8  },
-  { name:'Transaction log — Q2',    live:false, views:3  },
-  { name:'Pipeline snapshot',       live:true,  views:6  },
-];
- 
-// ─── STATE ──────────────────────────────────────────────────────────────────
+
 let currentUser = null;
 let currentRole = 'agent';
-let selectedLoginRole = 'agent';
- 
-// ─── AUTH ────────────────────────────────────────────────────────────────────
-function selectRole(role, btn) {
-  selectedLoginRole = role;
-  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+let dateRange   = 'month';
+let cache = { fub:{}, sisu:{} };
+let allLeads = [];
+
+// ─── DATE HELPERS ─────────────────────────────────────────────────────────────
+function dates() {
+  const now = new Date(), pad = n=>String(n).padStart(2,'0');
+  const fmt = d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const end = fmt(now); let start;
+  if (dateRange==='week')  { const d=new Date(now); d.setDate(d.getDate()-7); start=fmt(d); }
+  else if (dateRange==='month') { start=`${now.getFullYear()}-${pad(now.getMonth()+1)}-01`; }
+  else { start=`${now.getFullYear()}-01-01`; }
+  return {start,end};
+}
+function periodLabel() {
+  const n=new Date();
+  if (dateRange==='week') return 'This week';
+  if (dateRange==='month') return n.toLocaleString('default',{month:'long',year:'numeric'});
+  return `YTD ${n.getFullYear()}`;
+}
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+function selectRole(r,btn) {
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  const emailInput = document.getElementById('login-email');
-  emailInput.placeholder = role === 'leadership' ? 'adam@enchantaz.com' : 'sarah@enchantaz.com';
 }
- 
 function doLogin() {
-  const email = document.getElementById('login-email').value.trim().toLowerCase();
-  const pass  = document.getElementById('login-pass').value;
-  const user  = USERS[email];
-  const err   = document.getElementById('login-error');
-  if (!user || user.pass !== pass) {
-    err.style.display = 'block';
-    return;
-  }
-  err.style.display = 'none';
-  currentUser = { ...user, email };
-  currentRole = user.role;
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  initDashboard();
+  const email=document.getElementById('login-email').value.trim().toLowerCase();
+  const pass=document.getElementById('login-pass').value;
+  const u=USERS[email], err=document.getElementById('login-error');
+  if (!u||u.pass!==pass){err.style.display='block';return;}
+  err.style.display='none';
+  currentUser={...u,email}; currentRole=u.role;
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  initApp();
 }
- 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') doLogin();
-});
- 
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('login-screen').style.display!=='none')doLogin();});
 function doLogout() {
-  currentUser = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('login-email').value = '';
-  document.getElementById('login-pass').value = '';
+  currentUser=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  ['login-email','login-pass'].forEach(id=>document.getElementById(id).value='');
 }
- 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-function initDashboard() {
-  // User info
-  document.getElementById('user-avatar').textContent = currentUser.initials;
-  document.getElementById('user-name').textContent = currentUser.name;
-  document.getElementById('user-role').textContent = currentUser.title;
-  document.getElementById('settings-name').textContent = currentUser.name;
-  document.getElementById('settings-email').textContent = currentUser.email;
-  document.getElementById('settings-name-input').value = currentUser.name;
-  document.getElementById('settings-role-badge').textContent = currentUser.title;
- 
-  // Role gating
-  const isLeader = currentRole === 'leadership';
-  document.querySelectorAll('.leadership-only').forEach(el => {
-    el.style.display = isLeader ? '' : 'none';
-  });
- 
-  // Greeting
-  const hour = new Date().getHours();
-  const greet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-  const firstName = currentUser.name.split(' ')[0];
-  document.getElementById('overview-greeting').textContent = `${greet}, ${firstName}`;
- 
-  buildAll();
-  showPanel('overview', document.querySelector('.nav-item.active'));
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function initApp() {
+  document.getElementById('user-avatar').textContent=currentUser.initials;
+  document.getElementById('user-name').textContent=currentUser.name;
+  document.getElementById('user-role-label').textContent=currentUser.title;
+  document.querySelectorAll('.leadership-only').forEach(el=>el.style.display=currentRole==='leadership'?'':'none');
+  const h=new Date().getHours(), g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('ov-greeting').textContent=`${g}, ${currentUser.name.split(' ')[0]}`;
+  syncAll();
 }
- 
-// ─── BUILD ───────────────────────────────────────────────────────────────────
-function fmt$(n) { return '$' + n.toLocaleString(); }
-function fmtK(n) { return '$' + (n/1000).toFixed(0) + 'k'; }
- 
-function stageBadge(s) {
-  const map = {
-    'Under contract':'b-blue','Pending docs':'b-amber','Clear to close':'b-green',
-    'Active buyer':'b-gray','Closed':'b-green','Docs pending':'b-amber'
-  };
-  return `<span class="badge ${map[s]||'b-gray'}">${s}</span>`;
-}
- 
-function buildAll() {
-  buildOverview();
-  buildPipeline();
-  buildCalls();
-  buildTransactions();
-  buildTeam();
-  buildReports();
-  buildSettings();
-}
- 
-function buildOverview() {
-  const isLeader = currentRole === 'leadership';
-  const myAgent  = AGENTS[0];
- 
-  const mData = isLeader
-    ? [
-        { label:'Team GCI — June', val:fmtK(AGENTS.reduce((s,a)=>s+a.gci,0)), sub:'8 agents', delta:'+9%', up:true },
-        { label:'Active pipeline',  val:'$3.4M',  sub:'23 open deals', delta:'+4%', up:true },
-        { label:'Closings',         val:'6',       sub:'This month', delta:'', up:true },
-        { label:'New leads (FUB)',  val:'38',      sub:'Last 7 days', delta:'+12%', up:true },
-      ]
-    : [
-        { label:'My GCI — June',    val:fmtK(myAgent.gci), sub:`Goal: ${fmtK(myAgent.goal)}`, delta:'+8%', up:true },
-        { label:'My pipeline',      val:'$715k',  sub:'3 active deals', delta:'', up:true },
-        { label:'My closings',      val:'2',       sub:'This month', delta:'', up:true },
-        { label:'My calls today',   val:'7',       sub:'3 connected', delta:'', up:true },
-      ];
- 
-  document.getElementById('overview-metrics').innerHTML = mData.map(m => `
-    <div class="metric-card">
-      <div class="metric-eyebrow">${m.label}</div>
-      <div class="metric-value">${m.val}</div>
-      ${m.delta ? `<span class="metric-delta ${m.up?'delta-up':'delta-dn'}">${m.delta}</span>` : ''}
-      <div class="metric-sub">${m.sub}</div>
-    </div>`).join('');
- 
-  const myPipe = isLeader
-    ? PIPELINE.slice(0,4)
-    : PIPELINE.filter(p => p.agent === 'SK');
- 
-  document.getElementById('my-pipeline-rows').innerHTML = myPipe.map(p => `
-    <div class="data-row">
-      <div style="flex:1">
-        <div class="row-main">${p.address}</div>
-        <div class="row-sub">${fmt$(p.price)}</div>
-      </div>
-      ${stageBadge(p.stage)}
-    </div>`).join('');
- 
-  const closings = [
-    { address:'8 River Road',      date:'Jun 19', days:'2 days',  cls:'b-red' },
-    { address:'47 Maple Avenue',   date:'Jun 22', days:'5 days',  cls:'b-amber' },
-    { address:'12 Oak Street',     date:'Jun 28', days:'11 days', cls:'b-gray' },
-    { address:'201 Birch Lane',    date:'Jul 3',  days:'16 days', cls:'b-gray' },
-  ];
-  const myClosings = isLeader ? closings : closings.filter((c,i) => i < 2);
-  document.getElementById('closing-rows').innerHTML = myClosings.map(c => `
-    <div class="data-row">
-      <div style="flex:1">
-        <div class="row-main">${c.address}</div>
-        <div class="row-sub">${c.date}</div>
-      </div>
-      <span class="badge ${c.cls}">${c.days}</span>
-    </div>`).join('');
- 
-  if (isLeader) {
-    const maxGci = Math.max(...AGENTS.map(a=>a.gci));
-    document.getElementById('team-gci-rows').innerHTML = AGENTS.map(a => `
-      <div class="data-row">
-        <div class="avatar">${a.initials}</div>
-        <div style="width:110px" class="row-main">${a.name.split(' ')[0]} ${a.name.split(' ')[1][0]}.</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${(a.gci/maxGci*100).toFixed(0)}%"></div></div>
-        <div class="row-val" style="width:52px;text-align:right">${fmtK(a.gci)}</div>
-        <span class="badge ${a.status==='on-track'?'b-green':'b-amber'}" style="width:70px;text-align:center">${a.status==='on-track'?'On track':'Behind'}</span>
-      </div>`).join('');
+
+// ─── PROXY FETCH ──────────────────────────────────────────────────────────────
+async function proxyFetch(url, opts={}, proxyIdx=0) {
+  if (proxyIdx >= PROXIES.length) throw new Error('All proxies failed');
+  try {
+    const proxyUrl = PROXIES[proxyIdx] + encodeURIComponent(url);
+    const r = await fetch(proxyUrl, opts);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r;
+  } catch(e) {
+    console.warn(`Proxy ${proxyIdx} failed, trying next:`, e.message);
+    return proxyFetch(url, opts, proxyIdx+1);
   }
 }
- 
-function buildPipeline() {
-  const isLeader = currentRole === 'leadership';
-  const data = isLeader ? PIPELINE : PIPELINE.filter(p => p.agent === 'SK');
-  const totalVol = data.reduce((s,p)=>s+p.price,0);
- 
-  document.getElementById('pipeline-metrics').innerHTML = `
-    <div class="metric-card">
-      <div class="metric-eyebrow">${isLeader?'Total pipeline':'My pipeline'}</div>
-      <div class="metric-value">${isLeader?'$3.4M':fmtK(totalVol)}</div>
-      <div class="metric-sub">${data.length} active deals</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Under contract</div>
-      <div class="metric-value">${data.filter(p=>p.stage==='Under contract').length}</div>
-      <div class="metric-sub">deals</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Pending docs</div>
-      <div class="metric-value">${data.filter(p=>p.stage==='Pending docs').length}</div>
-      <div class="metric-sub">Skyslope review</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Avg days open</div>
-      <div class="metric-value">${Math.round(data.reduce((s,p)=>s+p.days,0)/data.length)}</div>
-      <div class="metric-sub">days avg</div>
-    </div>`;
- 
-  document.getElementById('pipeline-rows').innerHTML = data.map(p => `
-    <div class="data-row">
-      <div class="avatar">${p.agent}</div>
-      <div style="flex:1">
-        <div class="row-main">${p.address}</div>
-        <div class="row-sub">${p.days} days open · ${p.source}</div>
-      </div>
-      <div class="row-val" style="margin-right:12px">${fmt$(p.price)}</div>
-      ${stageBadge(p.stage)}
-    </div>`).join('');
+
+async function fubFetch(endpoint, params='') {
+  const b64 = btoa(FUB_KEY+':');
+  const r = await proxyFetch('https://api.followupboss.com/v1'+endpoint+params, {
+    headers:{'Authorization':'Basic '+b64,'Accept':'application/json','X-System':'EnchantDashboard','X-System-Key':FUB_KEY}
+  });
+  return r.json();
 }
- 
-function buildCalls() {
-  const isLeader = currentRole === 'leadership';
-  document.getElementById('calls-metrics').innerHTML = `
-    <div class="metric-card">
-      <div class="metric-eyebrow">${isLeader?'Team calls today':'My calls today'}</div>
-      <div class="metric-value">${isLeader?'47':'7'}</div>
-      <div class="metric-sub">${isLeader?'all agents':'this session'}</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Connected</div>
-      <div class="metric-value">${isLeader?'18':'3'}</div>
-      <div class="metric-sub">${isLeader?'38%':'43%'} connect rate</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Appointments set</div>
-      <div class="metric-value">${isLeader?'4':'1'}</div>
-      <div class="metric-sub">today</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Calls this month</div>
-      <div class="metric-value">${isLeader?'892':'127'}</div>
-      <div class="metric-sub">Mojo + FUB</div>
-    </div>`;
- 
-  const resultBadge = r => {
-    const m = { Connected:'b-green', Voicemail:'b-gray', 'No answer':'b-gray', Callback:'b-amber' };
-    return `<span class="badge ${m[r]||'b-gray'}">${r}</span>`;
-  };
- 
-  document.getElementById('call-log-rows').innerHTML = CALLS_TODAY.map(c => `
-    <div class="data-row">
-      <div style="flex:1">
-        <div class="row-main">${c.contact}</div>
-        <div class="row-sub">${c.time}</div>
-      </div>
-      ${resultBadge(c.result)}
-    </div>`).join('');
- 
-  document.getElementById('appt-rows').innerHTML = APPTS.map(a => `
-    <div class="data-row">
-      <div style="flex:1">
-        <div class="row-main">${a.name}</div>
-        <div class="row-sub">${a.date} · ${a.time}</div>
-      </div>
-      <span class="badge b-green-dark" style="font-size:.58rem">${a.type}</span>
-    </div>`).join('');
+
+async function sisuFetch(endpoint, body=null, method='POST') {
+  const opts = {method, headers:{'Authorization':SISU_AUTH,'Content-Type':'application/json','Accept':'application/json'}};
+  if (body) opts.body = JSON.stringify(body);
+  const r = await proxyFetch(SISU_BASE+endpoint, opts);
+  return r.json();
 }
- 
-function buildTransactions() {
-  const isLeader = currentRole === 'leadership';
-  const data = isLeader ? TRANSACTIONS : TRANSACTIONS.filter(t => t.agent === 'SK');
-  const totalVol = data.filter(t=>t.status==='Closed').reduce((s,t)=>s+t.price,0);
- 
+
+// ─── STATUS ───────────────────────────────────────────────────────────────────
+function setStatus(api, state) {
+  const dot=document.getElementById(api+'-dot'), lbl=document.getElementById(api+'-status');
+  const nm={fub:'FUB',sisu:'SISU',sky:'Skyslope'};
+  const cls={connected:'dot-green',error:'dot-red',connecting:'dot-gray',pending:'dot-amber'};
+  const tx={connected:'Connected ✓',error:'Error — retrying',connecting:'Connecting…',pending:'Backend needed'};
+  dot.className='status-dot '+(cls[state]||'dot-gray');
+  lbl.textContent=nm[api]+' — '+(tx[state]||state);
+}
+
+// ─── SYNC ─────────────────────────────────────────────────────────────────────
+async function syncAll() {
+  setStatus('fub','connecting'); setStatus('sisu','connecting');
+  const {start,end}=dates();
+  await Promise.allSettled([loadFUB(), loadSISU(start,end)]);
+  document.getElementById('last-sync').textContent='Last sync: '+new Date().toLocaleTimeString();
+  renderActive();
+}
+
+async function loadFUB() {
+  try {
+    const [ppl, deals] = await Promise.all([
+      fubFetch('/people','?limit=100&sort=-created&fields=id,name,stage,assignedTo,created,email,phone,tags,lastCalled'),
+      fubFetch('/deals','?limit=50&fields=id,name,price,stage,person,closeDate,status'),
+    ]);
+    cache.fub.people = ppl.people || [];
+    cache.fub.deals  = deals.deals || [];
+    allLeads = cache.fub.people;
+    setStatus('fub','connected');
+  } catch(e) {
+    console.error('FUB:', e);
+    setStatus('fub','error');
+    cache.fub = {people:[], deals:[]};
+    showFUBFallback();
+  }
+}
+
+async function loadSISU(start, end) {
+  try {
+    const agentId = currentUser.sisuId;
+    const [stats, activity] = await Promise.all([
+      sisuFetch(`/v1/team/get-stats/${SISU_TEAM}/${agentId}`, {
+        method:'gci', start_date:start, end_date:end, context_filter:`a${agentId}`
+      }),
+      sisuFetch(`/v1/agent/activity/${agentId}/1`, {
+        include_counts:1, include_activities:1, include_context:0, start_date:start, end_date:end
+      }),
+    ]);
+    cache.sisu.stats    = stats;
+    cache.sisu.activity = activity;
+    setStatus('sisu','connected');
+  } catch(e) {
+    console.error('SISU:', e);
+    setStatus('sisu','error');
+    cache.sisu = {stats:null, activity:null};
+  }
+}
+
+function showFUBFallback() {
+  const msg = `<div class="error-box">FUB connection issue via browser proxy. <a href="https://app.followupboss.com" target="_blank" style="color:var(--green)">Open FUB directly ↗</a> — backend proxy will fix this permanently.</div>`;
+  ['ov-pipeline','pipe-deals','pipe-leads'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=msg;});
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderActive() {
+  updatePeriods();
+  const id = document.querySelector('.panel.active')?.id?.replace('panel-','');
+  const map = {overview:renderOverview, activity:renderActivity, pipeline:renderPipeline, transactions:renderTx, team:renderTeam};
+  if (map[id]) map[id]();
+}
+
+function updatePeriods() {
+  const lbl=periodLabel();
+  ['ov-period','act-period','pipe-period','tx-period'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=lbl;});
+}
+
+const fmt$ = n => n ? '$'+Number(n).toLocaleString() : '—';
+const fmtK = n => n ? '$'+(n/1000).toFixed(0)+'k' : '—';
+
+function stageBadge(s='') {
+  const sl=s.toLowerCase();
+  if (sl.includes('contract')) return `<span class="badge b-blue">${s}</span>`;
+  if (sl.includes('hot')||sl.includes('pending')) return `<span class="badge b-amber">${s}</span>`;
+  if (sl.includes('close')||sl.includes('won')) return `<span class="badge b-green">${s}</span>`;
+  if (sl.includes('lost')||sl.includes('dead')) return `<span class="badge b-red">${s}</span>`;
+  return `<span class="badge b-gray">${s||'—'}</span>`;
+}
+
+function renderOverview() {
+  const fub=cache.fub, sisu=cache.sisu;
+  const gci   = sisu.stats?.data?.gci ?? sisu.stats?.gci ?? null;
+  const deals = fub.deals?.length ?? 0;
+  const leads = fub.people?.length ?? 0;
+  const closed = fub.deals?.filter(d=>(d.stage||'').toLowerCase().includes('close')||d.won).length ?? 0;
+
+  document.getElementById('ov-metrics').innerHTML = `
+    <div class="metric-card"><div class="metric-eyebrow">GCI</div><div class="metric-value">${gci!==null?fmtK(gci):'—'}</div><div class="metric-sub">${sisu.stats?'Live · SISU':'SISU connecting'}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Pipeline</div><div class="metric-value">${deals}</div><div class="metric-sub">${fub.deals?'Live · FUB':'FUB connecting'}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Closings</div><div class="metric-value">${closed}</div><div class="metric-sub">${periodLabel()}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Leads (FUB)</div><div class="metric-value">${leads}</div><div class="metric-sub">Total contacts</div></div>`;
+
+  const dHtml = (fub.deals||[]).slice(0,6).map(d=>`
+    <div class="data-row">
+      <div style="flex:1"><div class="row-main">${d.name||d.person?.name||'Deal'}</div><div class="row-sub">${d.closeDate?'Close: '+d.closeDate:''}</div></div>
+      <div class="row-val" style="margin-right:9px">${d.price?fmt$(d.price):''}</div>
+      ${stageBadge(d.stage)}
+    </div>`).join('');
+  document.getElementById('ov-pipeline').innerHTML = dHtml || '<div class="loading-text">No deals found in FUB</div>';
+
+  const acts = sisu.activity?.activities || sisu.activity?.data?.activities || [];
+  const aHtml = acts.slice(0,5).map(a=>`
+    <div class="data-row">
+      <div style="flex:1"><div class="row-main">${(a.activity_type||a.type||'Activity').replace(/_/g,' ')}</div><div class="row-sub">${a.date||''}</div></div>
+      <div class="row-val">${a.counter??a.count??'—'}</div>
+    </div>`).join('');
+  document.getElementById('ov-activity').innerHTML = aHtml || `<div class="loading-text">${sisu.activity===null?'SISU connecting…':'No activity in this period'}</div>`;
+}
+
+function renderActivity() {
+  const sisu = cache.sisu;
+  const counts = sisu.activity?.counts || sisu.activity?.data?.counts || {};
+  const acts   = sisu.activity?.activities || sisu.activity?.data?.activities || [];
+
+  const tiles = [
+    {key:'NUMBER_OF_DIALS',     label:'Number of dials',    src:'Mojo'},
+    {key:'FUB_CALLS',           label:'FUB calls',          src:'FUB'},
+    {key:'CONVERSATIONS',       label:'Conversations',      src:'SISU'},
+    {key:'EMAILS_SENT',         label:'Emails sent',        src:'FUB'},
+    {key:'TEXT_MESSAGES',       label:'Text messages',      src:'FUB'},
+    {key:'OPEN_HOUSES',         label:'Open houses',        src:'SISU'},
+    {key:'MINUTES_PROSPECTED',  label:'Min prospected',     src:'Mojo'},
+    {key:'FUB_INBOUND_CALLS',   label:'Inbound calls',      src:'FUB'},
+    {key:'FUB_LEADS',           label:'New leads',          src:'FUB'},
+    {key:'FUB_CONVERSATIONS',   label:'FUB conversations',  src:'FUB'},
+  ];
+
+  const hasData = Object.keys(counts).length>0 || acts.length>0;
+  document.getElementById('act-tiles').innerHTML = tiles.map(t=>{
+    const v = counts[t.key] ?? acts.find(a=>a.activity_type===t.key)?.counter ?? (hasData?0:'—');
+    return `<div class="act-tile"><div class="act-label">${t.label}</div><div class="act-val">${v}</div><div class="act-source">${t.src}</div></div>`;
+  }).join('') + (!hasData ? `<div style="grid-column:1/-1"><div class="error-box">SISU connecting via proxy — data loads once connection is confirmed. <a href="https://app.sisu.co" target="_blank" style="color:var(--green)">View in SISU ↗</a></div></div>` : '');
+
+  const dHtml = acts.map(a=>`
+    <div class="data-row">
+      <div style="flex:1"><div class="row-main">${(a.activity_type||'').replace(/_/g,' ')}</div><div class="row-sub">${a.date||''}</div></div>
+      <div class="row-val">${a.counter??a.count??'—'}</div>
+    </div>`).join('');
+  document.getElementById('act-detail').innerHTML = dHtml || '<div class="loading-text">No activity detail available for this period</div>';
+}
+
+function renderPipeline() {
+  const fub=cache.fub;
+  const deals=fub.deals||[], leads=fub.people||[];
+  const totalVal = deals.reduce((s,d)=>s+(Number(d.price)||0),0);
+  const uc = deals.filter(d=>(d.stage||'').toLowerCase().includes('contract')).length;
+  const newLeads = leads.filter(l=>l.created&&(new Date()-new Date(l.created))<7*86400000).length;
+
+  document.getElementById('pipe-metrics').innerHTML = `
+    <div class="metric-card"><div class="metric-eyebrow">Total value</div><div class="metric-value">${fmtK(totalVal)}</div><div class="metric-sub">${deals.length} deals</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Active deals</div><div class="metric-value">${deals.length}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Under contract</div><div class="metric-value">${uc}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">New leads 7d</div><div class="metric-value">${newLeads}</div></div>`;
+
+  document.getElementById('pipe-deals').innerHTML = deals.map(d=>`
+    <div class="data-row">
+      <div style="flex:1"><div class="row-main">${d.name||d.person?.name||'Deal'}</div><div class="row-sub">${d.person?.name||''} ${d.closeDate?'· Close: '+d.closeDate:''}</div></div>
+      <div class="row-val" style="margin-right:9px">${d.price?fmt$(d.price):''}</div>
+      ${stageBadge(d.stage)}
+    </div>`).join('') || '<div class="loading-text">No deals in FUB pipeline</div>';
+
+  renderLeadFilter('all');
+}
+
+function filterLeads(f, btn) {
+  document.querySelectorAll('#panel-pipeline .df-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLeadFilter(f);
+}
+function renderLeadFilter(f) {
+  const leads=cache.fub.people||[];
+  const filtered = f==='all' ? leads : leads.filter(l=>{
+    const tags=(l.tags||[]).join(' ').toLowerCase(), stage=(l.stage||'').toLowerCase();
+    if (f==='hot') return tags.includes('hot')||stage.includes('hot');
+    if (f==='warm') return tags.includes('warm')||stage.includes('warm');
+    if (f==='new') return l.created&&(new Date()-new Date(l.created))<7*86400000;
+    if (f==='uncontacted') return !l.lastCalled;
+    return true;
+  });
+  document.getElementById('pipe-leads').innerHTML = filtered.slice(0,25).map(l=>`
+    <div class="data-row">
+      <div class="avatar">${(l.name||'?').split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase()}</div>
+      <div style="flex:1"><div class="row-main">${l.name||'Unknown'}</div><div class="row-sub">${l.email||l.phone||''} ${l.assignedTo?.name?'· '+l.assignedTo.name:''}</div></div>
+      ${stageBadge(l.stage)}
+    </div>`).join('') || `<div class="loading-text">No leads match — ${f==='all'?'FUB is empty or connecting':'try another filter'}</div>`;
+}
+
+function renderTx() {
+  const s=cache.sisu.stats?.data||cache.sisu.stats||{};
+  const gci=s.gci||0, vol=s.volume||s.trans_amt||0, cnt=s.count||s.closed||0, avg=cnt?Math.round(vol/cnt):0;
   document.getElementById('tx-metrics').innerHTML = `
-    <div class="metric-card">
-      <div class="metric-eyebrow">${isLeader?'Team closings':'My closings'}</div>
-      <div class="metric-value">${data.filter(t=>t.status==='Closed').length}</div>
-      <div class="metric-sub">this month</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Closed volume</div>
-      <div class="metric-value">${isLeader?'$2.8M':fmtK(totalVol)}</div>
-      <div class="metric-sub">this month</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Docs pending</div>
-      <div class="metric-value">${data.filter(t=>t.docs==='Pending').length}</div>
-      <div class="metric-sub">Skyslope review</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Avg sale price</div>
-      <div class="metric-value">$467k</div>
-      <div class="metric-sub">this month</div>
-    </div>`;
- 
-  document.getElementById('tx-rows').innerHTML = data.map(t => `
+    <div class="metric-card"><div class="metric-eyebrow">Closed volume</div><div class="metric-value">${vol?fmtK(vol):'—'}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">GCI earned</div><div class="metric-value">${gci?fmtK(gci):'—'}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Closed deals</div><div class="metric-value">${cnt||'—'}</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Avg sale price</div><div class="metric-value">${avg?fmtK(avg):'—'}</div></div>`;
+  const txs=s.transactions||[];
+  document.getElementById('tx-rows').innerHTML = txs.map(t=>`
     <div class="data-row">
-      <div class="avatar">${t.agent}</div>
-      <div style="flex:1">
-        <div class="row-main">${t.address}</div>
-        <div class="row-sub">Closed ${t.closed}</div>
-      </div>
-      <div class="row-val" style="margin-right:12px">${fmt$(t.price)}</div>
-      ${stageBadge(t.status)}
-    </div>`).join('');
+      <div style="flex:1"><div class="row-main">${t.address||t.first_name+' '+t.last_name}</div><div class="row-sub">Closed: ${t.closed_dt||'—'} · ${t.type_id==='s'?'Seller':'Buyer'}</div></div>
+      <div class="row-val" style="margin-right:9px">${fmt$(t.trans_amt)}</div>
+      <span class="badge b-green">Closed</span>
+    </div>`).join('') || `<div class="loading-text">SISU data loading… <a href="https://app.skyslope.com" target="_blank" style="color:var(--green)">Open Skyslope ↗</a></div>`;
 }
- 
-function buildTeam() {
-  const total = AGENTS.reduce((s,a)=>s+a.gci,0);
-  const goal  = AGENTS.reduce((s,a)=>s+a.goal,0);
-  const pct   = Math.round(total/goal*100);
- 
+
+function renderTeam() {
   document.getElementById('team-metrics').innerHTML = `
-    <div class="metric-card">
-      <div class="metric-eyebrow">Active agents</div>
-      <div class="metric-value">${AGENTS.length}</div>
-      <div class="metric-sub">all connected</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Team GCI — MTD</div>
-      <div class="metric-value">${fmtK(total)}</div>
-      <div class="metric-sub">Goal: ${fmtK(goal)}</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Goal attainment</div>
-      <div class="metric-value">${pct}%</div>
-      <div class="metric-sub">13 days left</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Avg per agent</div>
-      <div class="metric-value">${fmtK(Math.round(total/AGENTS.length))}</div>
-      <div class="metric-sub">this month</div>
-    </div>`;
- 
-  document.getElementById('scorecard-body').innerHTML = AGENTS.map(a => `
-    <tr style="border-bottom:1px solid var(--border)">
-      <td style="padding:10px 12px 10px 0">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="avatar" style="width:28px;height:28px;font-size:.62rem">${a.initials}</div>
-          <span style="font-size:.82rem;font-weight:500">${a.name}</span>
-        </div>
-      </td>
-      <td style="text-align:right;padding:10px 8px;font-family:var(--serif);font-size:.95rem">${fmtK(a.gci)}</td>
-      <td style="text-align:right;padding:10px 8px;font-size:.82rem">${a.deals}</td>
-      <td style="text-align:right;padding:10px 8px;font-size:.82rem">${a.calls}</td>
-      <td style="text-align:right;padding:10px 8px;font-size:.82rem">${fmtK(a.volume)}</td>
-      <td style="text-align:center;padding:10px 0">
-        <span class="badge ${a.status==='on-track'?'b-green':'b-amber'}">${a.status==='on-track'?'On track':'Behind'}</span>
-      </td>
-    </tr>`).join('');
+    <div class="metric-card"><div class="metric-eyebrow">Team GCI</div><div class="metric-value">—</div><div class="metric-sub">SISU loading</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Active agents</div><div class="metric-value">—</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Team volume</div><div class="metric-value">—</div></div>
+    <div class="metric-card"><div class="metric-eyebrow">Avg per agent</div><div class="metric-value">—</div></div>`;
+  document.getElementById('team-board').innerHTML =
+    `<div class="loading-text">Team leaderboard loading from SISU… <a href="https://app.sisu.co" target="_blank" style="color:var(--green)">Open SISU ↗</a></div>`;
 }
- 
-function buildReports() {
-  document.getElementById('reports-metrics').innerHTML = `
-    <div class="metric-card">
-      <div class="metric-eyebrow">Saved reports</div>
-      <div class="metric-value">4</div>
-      <div class="metric-sub">3 shared live</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Link views</div>
-      <div class="metric-value">31</div>
-      <div class="metric-sub">this week</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Last export</div>
-      <div class="metric-value">Today</div>
-      <div class="metric-sub">9:42 AM</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-eyebrow">Auto-send</div>
-      <div class="metric-value">2</div>
-      <div class="metric-sub">weekly emails on</div>
-    </div>`;
- 
-  document.getElementById('report-rows').innerHTML = REPORTS_LIST.map(r => `
-    <div class="data-row">
-      <div style="flex:1">
-        <div class="row-main">${r.name}</div>
-        <div class="row-sub">${r.views} views this week</div>
-      </div>
-      <span class="badge ${r.live?'b-green-dark':'b-gray'}" style="margin-right:10px">${r.live?'Live':'Static'}</span>
-      <button style="background:none;border:1px solid var(--border);padding:5px 10px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--dark)" onclick="openShareModal()">Copy</button>
-    </div>`).join('');
- 
-  document.getElementById('activity-rows').innerHTML = [
-    { msg:'Report link opened by external user',   time:'2 min ago' },
-    { msg:'Monthly GCI report auto-sent',           time:'8:00 AM'   },
-    { msg:'Skyslope sync completed',                time:'7:55 AM'   },
-    { msg:'FUB pipeline updated — 2 new leads',     time:'7:48 AM'   },
-    { msg:'Agent scorecard report generated',       time:'Yesterday' },
-  ].map(a => `
-    <div class="data-row">
-      <div style="flex:1">
-        <div class="row-main">${a.msg}</div>
-        <div class="row-sub">${a.time}</div>
-      </div>
-    </div>`).join('');
+
+// ─── DATE RANGE ───────────────────────────────────────────────────────────────
+function setRange(r, btn) {
+  dateRange=r;
+  document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  syncAll();
 }
- 
-function buildSettings() {
-  document.getElementById('user-mgmt-rows').innerHTML = [
-    { name:'Sarah Kowalski',  email:'sarah@enchantaz.com', role:'Agent',   status:'active'   },
-    { name:'James Morrison',  email:'james@enchantaz.com', role:'Agent',   status:'active'   },
-    { name:'Priya Lawson',    email:'priya@enchantaz.com', role:'Agent',   status:'active'   },
-    { name:'Carlos Reyes',    email:'carlos@enchantaz.com',role:'Agent',   status:'active'   },
-    { name:'Brittney Engel',  email:'britt@enchantaz.com', role:'Agent',   status:'active'   },
-    { name:'Nolan LaFollette',email:'nolan@enchantaz.com', role:'Agent',   status:'inactive' },
-  ].map(u => `
-    <div class="data-row">
-      <div class="avatar">${u.name.split(' ').map(n=>n[0]).join('')}</div>
-      <div style="flex:1">
-        <div class="row-main">${u.name}</div>
-        <div class="row-sub">${u.email}</div>
-      </div>
-      <span class="badge ${u.status==='active'?'b-green':'b-gray'}" style="margin-right:10px">${u.status==='active'?'Active':'Inactive'}</span>
-      <button style="background:none;border:1px solid var(--border);padding:5px 10px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--dark)"
-        onclick="toggleUser(this,'${u.name}','${u.status}')">${u.status==='active'?'Deactivate':'Reactivate'}</button>
-    </div>`).join('');
+
+// ─── NAV ──────────────────────────────────────────────────────────────────────
+function showPanel(id, el) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item,.nav-portal-link').forEach(n=>n.classList.remove('active'));
+  const p=document.getElementById('panel-'+id); if(p) p.classList.add('active');
+  if(el) el.classList.add('active');
+  const titles={overview:'Overview',activity:'Activity',pipeline:'Pipeline',transactions:'Transactions',team:'Team',reports:'Reports',portal:'Agent Portal'};
+  document.getElementById('page-title').textContent=titles[id]||id;
+  closeMobileNav(); updatePeriods();
+  const renders={overview:renderOverview,activity:renderActivity,pipeline:renderPipeline,transactions:renderTx,team:renderTeam};
+  if(renders[id]) renders[id]();
 }
- 
-// ─── NAVIGATION ──────────────────────────────────────────────────────────────
-function showPanel(id, navEl) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const panel = document.getElementById('panel-'+id);
-  if (panel) panel.classList.add('active');
-  if (navEl) navEl.classList.add('active');
-  const titles = {overview:'Overview',pipeline:'Pipeline',calls:'Calls',transactions:'Transactions',team:'Team',reports:'Reports',settings:'Settings'};
-  document.getElementById('page-title').textContent = titles[id] || id;
-  closeMobileNav();
-}
- 
-// ─── MOBILE NAV ──────────────────────────────────────────────────────────────
+
 function openMobileNav()  { document.getElementById('sidebar').classList.add('open'); document.getElementById('mobile-overlay').classList.add('open'); }
 function closeMobileNav() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('mobile-overlay').classList.remove('open'); }
- 
-// ─── SHARE MODAL ─────────────────────────────────────────────────────────────
-function openShareModal()  { document.getElementById('share-modal').classList.add('open'); }
-function closeShareModal() { document.getElementById('share-modal').classList.remove('open'); }
+
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+function openModal()  { document.getElementById('share-token').textContent='enc_'+Math.random().toString(36).slice(2,9); document.getElementById('share-modal').classList.add('open'); }
+function closeModal() { document.getElementById('share-modal').classList.remove('open'); }
 function copyLink() {
-  const url = document.getElementById('share-link-url').textContent;
-  navigator.clipboard.writeText(url).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy Link', 2000);
-  });
-}
- 
-// ─── USER MGMT ───────────────────────────────────────────────────────────────
-function toggleUser(btn, name, status) {
-  const isActive = status === 'active';
-  const newStatus = isActive ? 'inactive' : 'active';
-  if (confirm(`${isActive?'Deactivate':'Reactivate'} ${name}?`)) {
-    const badge = btn.previousElementSibling;
-    badge.className = `badge ${newStatus==='active'?'b-green':'b-gray'}`;
-    badge.textContent = newStatus==='active'?'Active':'Inactive';
-    btn.textContent = newStatus==='active'?'Deactivate':'Reactivate';
-    btn.closest('.data-row').dataset.status = newStatus;
-  }
+  const url='https://enchant-dashboard.replit.app/r/'+document.getElementById('share-token').textContent;
+  navigator.clipboard?.writeText(url).then(()=>{const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy Link',2000);});
 }
 </script>
 </body>
