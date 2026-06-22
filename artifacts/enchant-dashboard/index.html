@@ -168,6 +168,38 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 .copy-btn:hover{background:var(--green)}
 .cancel-btn{background:none;border:1px solid var(--border);padding:8px 16px;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--dark)}
 
+/* SETTINGS PANEL */
+.sidebar-logo-btn{display:block;width:100%;background:none;border:none;cursor:pointer;padding:24px 20px 16px;text-align:left}
+.sidebar-logo-btn:hover .sidebar-logo-name{opacity:.8}
+.settings-subnav-item{display:flex;align-items:center;padding:11px 16px;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--dark);border-left:2px solid transparent;transition:all .15s;border-bottom:1px solid var(--border)}
+.settings-subnav-item:last-child{border-bottom:none}
+.settings-subnav-item:hover{color:var(--black);background:var(--cream)}
+.settings-subnav-item.active{color:var(--green);border-left-color:var(--green);background:var(--cream)}
+.settings-section{display:none}.settings-section.active{display:block}
+.settings-field{margin-bottom:14px}
+.settings-label{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);margin-bottom:6px;display:block}
+.settings-input{width:100%;border:1px solid var(--border);padding:10px 12px;font-family:var(--sans);font-size:.84rem;color:var(--black);background:var(--white);outline:none;border-radius:1px}
+.settings-input:focus{border-color:var(--green)}
+.settings-save-btn{background:var(--black);color:var(--white);border:none;padding:10px 22px;font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;margin-top:6px}
+.settings-save-btn:hover{background:var(--green)}
+.toggle-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+.toggle-wrap:last-child{border-bottom:none}
+.toggle-name{font-size:.78rem;font-weight:500;color:var(--black)}
+.toggle-desc{font-size:.7rem;color:var(--gray);margin-top:2px}
+.toggle{position:relative;width:38px;height:21px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:#ccc;border-radius:20px;cursor:pointer;transition:.2s}
+.toggle-slider:before{content:'';position:absolute;height:15px;width:15px;left:3px;bottom:3px;background:var(--white);border-radius:50%;transition:.2s}
+input:checked+.toggle-slider{background:var(--green)}
+input:checked+.toggle-slider:before{transform:translateX(17px)}
+.int-card{border:1px solid var(--border);padding:15px 18px;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between;background:var(--white);gap:12px}
+.int-name{font-size:.82rem;font-weight:600;color:var(--black)}
+.int-status{font-size:.66rem;margin-top:3px;display:flex;align-items:center;gap:4px}
+.int-action{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border:1px solid var(--border);cursor:pointer;background:none;font-family:var(--sans);color:var(--dark);white-space:nowrap;flex-shrink:0}
+.int-action:hover:not(:disabled){border-color:var(--green);color:var(--green)}
+.team-member-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.team-member-row:last-child{border-bottom:none}
+
 /* MOBILE */
 .mobile-nav-btn{display:none;background:none;border:none;cursor:pointer;padding:5px}
 .mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200}
@@ -208,7 +240,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
     <div class="login-error" id="login-error">Incorrect email or password.</div>
     <button class="login-btn" onclick="doLogin()">Sign In</button>
     <div class="login-hint">
-      Demo — Agent: adam@enchantaz.com / adam123<br>
+      Demo — Agent: adam.prather@enchantaz.com / Lincoln10!<br>
       Demo — Leadership: admin@enchantaz.com / leader123<br>
       <span style="color:var(--green);font-weight:600">Live: FUB · SISU · Skyslope</span>
     </div>
@@ -221,10 +253,15 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-  <div class="sidebar-logo">
-    <div class="sidebar-logo-name">Enchant</div>
-    <div class="sidebar-logo-tag">Real Estate Group</div>
-  </div>
+  <button class="sidebar-logo-btn" onclick="showPanel('overview')">
+    <div class="sidebar-logo-name" style="font-family:var(--serif);font-size:1.45rem;font-weight:400;color:var(--white);letter-spacing:.22em;text-transform:uppercase">ENCHANT</div>
+    <div class="sidebar-logo-tag" style="font-size:.5rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:2px">REAL ESTATE GROUP</div>
+    <div style="display:flex;align-items:center;gap:5px;margin-top:5px">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/EXp_Realty_logo.svg/320px-EXp_Realty_logo.svg.png" style="height:9px;opacity:.3;filter:invert(1)" alt="eXp">
+      <span style="font-size:.48rem;color:rgba(255,255,255,.28);letter-spacing:.06em">Brokered by eXp Realty</span>
+    </div>
+  </button>
+  <div style="height:1px;background:rgba(255,255,255,.07)"></div>
   <div class="sidebar-user">
     <div class="user-avatar" id="user-avatar">AP</div>
     <div>
@@ -258,6 +295,10 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
       Reports
     </div>
+    <div class="nav-item" onclick="showPanel('settings',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Settings
+    </div>
 
     <div class="nav-section" style="margin-top:8px">Platforms</div>
     <a class="nav-item" href="https://app.followupboss.com" target="_blank" rel="noopener">
@@ -276,9 +317,9 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
       Mojo Dialer
     </a>
-    <a class="nav-item" href="https://desertlivingnow.com" target="_blank" rel="noopener">
+    <a class="nav-item" href="https://client3.sierrainteractivedev.com/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-      IDX Search
+      Sierra
     </a>
 
     <!-- AGENT PORTAL SECTION -->
@@ -470,7 +511,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
           <div class="data-row"><div class="row-main">SISU</div><a class="ext-link" href="https://app.sisu.co" target="_blank">Open ↗</a></div>
           <div class="data-row"><div class="row-main">Skyslope</div><a class="ext-link" href="https://app.skyslope.com" target="_blank">Open ↗</a></div>
           <div class="data-row"><div class="row-main">Mojo Dialer</div><a class="ext-link" href="https://app.mojo.com" target="_blank">Open ↗</a></div>
-          <div class="data-row"><div class="row-main">IDX Search — desertlivingnow.com</div><a class="ext-link" href="https://desertlivingnow.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Sierra CRM — sierrainteractivedev.com</div><a class="ext-link" href="https://client3.sierrainteractivedev.com/" target="_blank">Open ↗</a></div>
           <div class="data-row"><div class="row-main">enchantaz.com</div><a class="ext-link" href="https://enchantaz.com" target="_blank">Open ↗</a></div>
         </div>
       </div>
@@ -513,7 +554,7 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
         <div class="card">
           <div class="card-header"><div class="card-title">Key resources</div></div>
           <div class="data-row"><div class="row-main">enchantaz.com</div><a class="ext-link" href="https://enchantaz.com" target="_blank">Visit ↗</a></div>
-          <div class="data-row"><div class="row-main">IDX Property Search</div><a class="ext-link" href="https://desertlivingnow.com" target="_blank">Open ↗</a></div>
+          <div class="data-row"><div class="row-main">Sierra CRM</div><a class="ext-link" href="https://client3.sierrainteractivedev.com/" target="_blank">Open ↗</a></div>
           <div class="data-row"><div class="row-main">SISU Dashboard</div><a class="ext-link" href="https://app.sisu.co" target="_blank">Open ↗</a></div>
           <div class="data-row"><div class="row-main">Follow Up Boss CRM</div><a class="ext-link" href="https://app.followupboss.com" target="_blank">Open ↗</a></div>
           <div class="data-row"><div class="row-main">Skyslope Transactions</div><a class="ext-link" href="https://app.skyslope.com" target="_blank">Open ↗</a></div>
@@ -527,6 +568,147 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
           <div class="data-row"><div style="flex:1"><div class="row-main">9221 E Via De Ventura</div><div class="row-sub">Scottsdale, AZ 85258</div></div></div>
           <div class="data-row"><div style="flex:1"><div class="row-main">License # SA659490000</div><div class="row-sub">eXp Realty</div></div></div>
         </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="section-eyebrow">Account</div>
+      <div class="section-title">Settings</div>
+      <div style="display:flex;gap:18px;align-items:flex-start">
+        <!-- Sub-nav -->
+        <div style="width:174px;flex-shrink:0;background:var(--white);border:1px solid var(--border)">
+          <div class="settings-subnav-item active" onclick="showSettings('profile',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:7px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Profile
+          </div>
+          <div class="settings-subnav-item" onclick="showSettings('password',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:7px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Password
+          </div>
+          <div class="settings-subnav-item" onclick="showSettings('notifications',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:7px;flex-shrink:0"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Notifications
+          </div>
+          <div class="settings-subnav-item" onclick="showSettings('integrations',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:7px;flex-shrink:0"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Integrations
+          </div>
+          <div class="settings-subnav-item leadership-only" onclick="showSettings('team',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:7px;flex-shrink:0"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Team Members
+          </div>
+        </div>
+        <!-- Content area -->
+        <div style="flex:1">
+          <!-- Profile -->
+          <div class="settings-section active" id="settings-profile">
+            <div class="card">
+              <div class="card-header"><div class="card-title">Profile</div></div>
+              <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border)">
+                <div style="width:56px;height:56px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.4rem;color:var(--white);flex-shrink:0" id="settings-avatar">AP</div>
+                <div>
+                  <div style="font-size:.88rem;font-weight:600;color:var(--black)" id="settings-name-display">Adam Prather</div>
+                  <div style="font-size:.7rem;color:var(--gray);margin-top:2px" id="settings-role-display">Agent / Broker</div>
+                  <span class="badge b-dark" id="settings-role-badge" style="font-size:.54rem;margin-top:5px;display:inline-block">Agent</span>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div class="settings-field"><label class="settings-label">Full name</label><input class="settings-input" id="set-name" value="Adam Prather"/></div>
+                <div class="settings-field"><label class="settings-label">Email</label><input class="settings-input" id="set-email" readonly style="background:var(--cream);color:var(--gray)"/></div>
+                <div class="settings-field"><label class="settings-label">Phone</label><input class="settings-input" id="set-phone" value="(480) 725-4460"/></div>
+                <div class="settings-field"><label class="settings-label">License number</label><input class="settings-input" id="set-license" value="SA659490000"/></div>
+              </div>
+              <button class="settings-save-btn" onclick="saveProfile(this)">Save profile</button>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="settings-section" id="settings-password">
+            <div class="card">
+              <div class="card-header"><div class="card-title">Change password</div></div>
+              <div style="max-width:360px">
+                <div class="settings-field"><label class="settings-label">Current password</label><input class="settings-input" type="password" id="set-pw-current" placeholder="••••••••"/></div>
+                <div class="settings-field"><label class="settings-label">New password</label><input class="settings-input" type="password" id="set-pw-new" placeholder="••••••••"/></div>
+                <div class="settings-field"><label class="settings-label">Confirm new password</label><input class="settings-input" type="password" id="set-pw-confirm" placeholder="••••••••"/></div>
+                <button class="settings-save-btn" onclick="changePassword()">Update password</button>
+                <div id="set-pw-msg" style="font-size:.74rem;margin-top:10px;display:none;line-height:1.5"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Notifications -->
+          <div class="settings-section" id="settings-notifications">
+            <div class="card">
+              <div class="card-header"><div class="card-title">Notification preferences</div></div>
+              <div class="toggle-wrap">
+                <div><div class="toggle-name">Email alerts</div><div class="toggle-desc">Get emailed on new hot leads and urgent follow-ups</div></div>
+                <label class="toggle"><input type="checkbox" checked id="notif-email"><span class="toggle-slider"></span></label>
+              </div>
+              <div class="toggle-wrap">
+                <div><div class="toggle-name">Weekly report</div><div class="toggle-desc">Monday summary of GCI, closings, and activity</div></div>
+                <label class="toggle"><input type="checkbox" checked id="notif-weekly"><span class="toggle-slider"></span></label>
+              </div>
+              <div class="toggle-wrap">
+                <div><div class="toggle-name">Sync alerts</div><div class="toggle-desc">Notify when FUB or SISU connection drops</div></div>
+                <label class="toggle"><input type="checkbox" id="notif-sync"><span class="toggle-slider"></span></label>
+              </div>
+              <button class="settings-save-btn" style="margin-top:14px" onclick="saveNotifications(this)">Save preferences</button>
+            </div>
+          </div>
+          <!-- Integrations -->
+          <div class="settings-section" id="settings-integrations">
+            <div class="card">
+              <div class="card-header"><div class="card-title">Connected integrations</div></div>
+              <div class="int-card">
+                <div><div class="int-name">Follow Up Boss</div><div class="int-status"><span class="status-dot dot-green" style="display:inline-block;vertical-align:middle"></span>&nbsp;<strong style="color:#27ae60">Connected</strong> — API key active</div></div>
+                <button class="int-action" onclick="reconnectInt('Follow Up Boss')">Reconnect</button>
+              </div>
+              <div class="int-card">
+                <div><div class="int-name">SISU</div><div class="int-status"><span class="status-dot dot-green" style="display:inline-block;vertical-align:middle"></span>&nbsp;<strong style="color:#27ae60">Connected</strong> — Team 48078 · Agent 225028</div></div>
+                <button class="int-action" onclick="reconnectInt('SISU')">Reconnect</button>
+              </div>
+              <div class="int-card">
+                <div><div class="int-name">Skyslope</div><div class="int-status"><span class="status-dot dot-amber" style="display:inline-block;vertical-align:middle"></span>&nbsp;<strong style="color:#f39c12">Pending</strong> — Not yet connected</div></div>
+                <button class="int-action" onclick="reconnectInt('Skyslope')">Connect</button>
+              </div>
+              <div class="int-card">
+                <div><div class="int-name">Mojo Dialer</div><div class="int-status"><span class="status-dot dot-amber" style="display:inline-block;vertical-align:middle"></span>&nbsp;<strong style="color:#f39c12">Pending</strong> — Not yet connected</div></div>
+                <button class="int-action" onclick="reconnectInt('Mojo Dialer')">Connect</button>
+              </div>
+              <div class="int-card">
+                <div><div class="int-name">Sierra CRM</div><div class="int-status"><span class="status-dot dot-amber" style="display:inline-block;vertical-align:middle"></span>&nbsp;<strong style="color:#f39c12">Pending</strong> — Not yet connected</div></div>
+                <button class="int-action" onclick="reconnectInt('Sierra CRM')">Connect</button>
+              </div>
+            </div>
+          </div>
+          <!-- Team Members -->
+          <div class="settings-section" id="settings-team">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Team members</div>
+                <button class="settings-save-btn" style="margin-top:0" onclick="inviteAgent()">+ Invite Agent</button>
+              </div>
+              <div class="team-member-row">
+                <div class="avatar">AP</div>
+                <div style="flex:1"><div class="row-main">Adam Prather</div><div class="row-sub">adam.prather@enchantaz.com · Broker / Owner</div></div>
+                <span class="badge b-green">Active</span>
+                <button class="int-action" disabled style="opacity:.35;cursor:default">Owner</button>
+              </div>
+              <div class="team-member-row">
+                <div class="avatar">SM</div>
+                <div style="flex:1"><div class="row-main">Sarah Martinez</div><div class="row-sub">sarah.martinez@enchantaz.com · Agent</div></div>
+                <span class="badge b-green" id="tmb-sm">Active</span>
+                <button class="int-action" id="tma-sm" onclick="toggleAgent('sm','Sarah Martinez')">Deactivate</button>
+              </div>
+              <div class="team-member-row">
+                <div class="avatar">JW</div>
+                <div style="flex:1"><div class="row-main">Josh Williams</div><div class="row-sub">josh.williams@enchantaz.com · Agent</div></div>
+                <span class="badge b-green" id="tmb-jw">Active</span>
+                <button class="int-action" id="tma-jw" onclick="toggleAgent('jw','Josh Williams')">Deactivate</button>
+              </div>
+              <div class="team-member-row">
+                <div class="avatar">ED</div>
+                <div style="flex:1"><div class="row-main">Emma Davis</div><div class="row-sub">emma.davis@enchantaz.com · Agent</div></div>
+                <span class="badge b-red" id="tmb-ed">Inactive</span>
+                <button class="int-action" id="tma-ed" style="border-color:var(--green);color:var(--green)" onclick="toggleAgent('ed','Emma Davis')">Reactivate</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- /settings content -->
       </div>
     </div>
 
@@ -631,9 +813,10 @@ function initApp() {
   document.getElementById('user-avatar').textContent=currentUser.initials;
   document.getElementById('user-name').textContent=currentUser.name;
   document.getElementById('user-role-label').textContent=currentUser.title;
-  document.querySelectorAll('.leadership-only').forEach(el=>el.style.display=currentRole==='leadership'?'':'none');
+  document.querySelectorAll('.leadership-only').forEach(el=>el.style.display=currentRole==='leadership'?'flex':'none');
   const h=new Date().getHours(), g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('ov-greeting').textContent=`${g}, ${currentUser.name.split(' ')[0]}`;
+  renderSettings();
   syncAll();
 }
 
@@ -896,10 +1079,10 @@ function showPanel(id, el) {
   document.querySelectorAll('.nav-item,.nav-portal-link').forEach(n=>n.classList.remove('active'));
   const p=document.getElementById('panel-'+id); if(p) p.classList.add('active');
   if(el) el.classList.add('active');
-  const titles={overview:'Overview',activity:'Activity',pipeline:'Pipeline',transactions:'Transactions',team:'Team',reports:'Reports',portal:'Agent Portal'};
+  const titles={overview:'Overview',activity:'Activity',pipeline:'Pipeline',transactions:'Transactions',team:'Team',reports:'Reports',portal:'Agent Portal',settings:'Settings'};
   document.getElementById('page-title').textContent=titles[id]||id;
   closeMobileNav(); updatePeriods();
-  const renders={overview:renderOverview,activity:renderActivity,pipeline:renderPipeline,transactions:renderTx,team:renderTeam};
+  const renders={overview:renderOverview,activity:renderActivity,pipeline:renderPipeline,transactions:renderTx,team:renderTeam,settings:renderSettings};
   if(renders[id]) renders[id]();
 }
 
@@ -912,6 +1095,68 @@ function closeModal() { document.getElementById('share-modal').classList.remove(
 function copyLink() {
   const url='https://enchant-dashboard.replit.app/r/'+document.getElementById('share-token').textContent;
   navigator.clipboard?.writeText(url).then(()=>{const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy Link',2000);});
+}
+
+// ─── SETTINGS ─────────────────────────────────────────────────────────────────
+function showSettings(id, el) {
+  document.querySelectorAll('.settings-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.settings-subnav-item').forEach(s=>s.classList.remove('active'));
+  const s=document.getElementById('settings-'+id); if(s) s.classList.add('active');
+  if(el) el.classList.add('active');
+}
+function renderSettings() {
+  if (!currentUser) return;
+  const av=document.getElementById('settings-avatar');
+  const nd=document.getElementById('settings-name-display');
+  const rd=document.getElementById('settings-role-display');
+  const rb=document.getElementById('settings-role-badge');
+  const em=document.getElementById('set-email');
+  const nm=document.getElementById('set-name');
+  if(av) av.textContent=currentUser.initials;
+  if(nd) nd.textContent=currentUser.name;
+  if(rd) rd.textContent=currentUser.title;
+  if(rb) rb.textContent=currentRole==='leadership'?'Leadership':'Agent';
+  if(em) em.value=currentUser.email||'';
+  if(nm) nm.value=currentUser.name||'';
+}
+function saveProfile(btn) {
+  if(btn){const t=btn.textContent;btn.textContent='Saved ✓';setTimeout(()=>btn.textContent=t,2000);}
+}
+function changePassword() {
+  const curr=document.getElementById('set-pw-current').value;
+  const nw=document.getElementById('set-pw-new').value;
+  const conf=document.getElementById('set-pw-confirm').value;
+  const msg=document.getElementById('set-pw-msg');
+  if(!curr||!nw||!conf){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='All fields are required.';return;}
+  if(nw!==conf){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='New passwords do not match.';return;}
+  msg.style.display='block';msg.style.color='var(--green)';msg.textContent='Password updated successfully.';
+  ['set-pw-current','set-pw-new','set-pw-confirm'].forEach(id=>document.getElementById(id).value='');
+}
+function saveNotifications(btn) {
+  if(btn){const t=btn.textContent;btn.textContent='Saved ✓';setTimeout(()=>btn.textContent=t,2000);}
+}
+function reconnectInt(name) {
+  alert('Reconnecting '+name+'…\nContact support to update API credentials.');
+}
+function inviteAgent() {
+  const email=prompt('Enter the agent\'s email address:');
+  if(email===null) return;
+  if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
+  alert('Invitation sent to '+email+'.\nThey will receive login instructions by email.');
+}
+const agentStatus={sm:true,jw:true,ed:false};
+function toggleAgent(id, name) {
+  const isActive=agentStatus[id];
+  if(isActive&&!confirm('Deactivate '+name+'? They will lose dashboard access.')) return;
+  agentStatus[id]=!isActive;
+  const badge=document.getElementById('tmb-'+id), btn=document.getElementById('tma-'+id);
+  if(agentStatus[id]){
+    badge.className='badge b-green';badge.textContent='Active';
+    btn.textContent='Deactivate';btn.style.borderColor='';btn.style.color='';
+  } else {
+    badge.className='badge b-red';badge.textContent='Inactive';
+    btn.textContent='Reactivate';btn.style.borderColor='var(--green)';btn.style.color='var(--green)';
+  }
 }
 </script>
 </body>
