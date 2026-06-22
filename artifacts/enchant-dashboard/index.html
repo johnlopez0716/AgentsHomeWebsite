@@ -721,6 +721,7 @@ function initApp(){
   document.getElementById('user-role-label').textContent=currentUser.title;
   const isLeader=currentRole==='leadership';
   document.querySelectorAll('.leadership-only').forEach(el=>el.style.display=isLeader?'flex':'none');
+  renderSettingsNav();
   const h=new Date().getHours(),g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('ov-greeting').textContent=`${g}, ${currentUser.name.split(' ')[0]}`;
   renderSettings();
@@ -965,6 +966,16 @@ function showSettings(id,el){
   const s=document.getElementById('settings-'+id);if(s)s.classList.add('active');
   if(el)el.classList.add('active');
 }
+function renderSettingsNav(){
+  const isLeader=currentRole==='leadership';
+  document.querySelectorAll('.settings-subnav-item').forEach(el=>{
+    if(el.classList.contains('leadership-only')){
+      el.style.display=isLeader?'flex':'none';
+    } else {
+      el.style.display='flex';
+    }
+  });
+}
 function renderSettings(){
   if(!currentUser)return;
   const av=document.getElementById('settings-avatar');if(av)av.textContent=currentUser.initials;
@@ -974,6 +985,7 @@ function renderSettings(){
   const rb=document.getElementById('settings-role-badge');if(rb)rb.textContent=currentRole==='leadership'?'Leadership':'Agent';
   const em=document.getElementById('set-email');if(em)em.value=currentUser.email||'';
   const nm=document.getElementById('set-name');if(nm)nm.value=currentUser.name||'';
+  renderSettingsNav();
 }
 function saveProfile(btn){if(btn){const t=btn.textContent;btn.textContent='Saved ✓';setTimeout(()=>btn.textContent=t,2000);}}
 function changePassword(){
