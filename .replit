@@ -30,3 +30,11 @@ externalPort = 8081
 [[ports]]
 localPort = 24180
 externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
+CLERK_PUBLISHABLE_KEY = "pk_test_c2V0LWxhZHliaXJkLTY1LmNsZXJrLmFjY291bnRzLmRldiQ"
+CLERK_SECRET_KEY = "sk_test_xXM7RB2EsFayL7SW34pnUL0juL89VvyATBPJV4EHdC"
+FUB_API_KEY = "fka_11u52bP3XxJbxh8d2QAXShXzyxs9e9Ht3L"
+SISU_AUTH = "Basic ZXhwLWVuY2hhbnQtcmVhbC1lc3RhdGUtZ3JvdXAtNDgwNzg6ZWU2YjQ4ODgtMTdjZC00NmJjLWI1YzgtODMwZGE0ZDhiYzM4"

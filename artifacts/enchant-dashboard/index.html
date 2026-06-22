@@ -549,8 +549,6 @@ body{font-family:var(--sans);background:var(--cream);color:var(--black);min-heig
 
 <script>
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
-const FUB_KEY   = 'fka_11u52bP3XxJbxh8d2QAXShXzyxs9e9Ht3L';
-const SISU_AUTH = 'Basic ZXhwLWVuY2hhbnQtcmVhbC1lc3RhdGUtZ3JvdXAtNDgwNzg6ZWU2YjQ4ODgtMTdjZC00NmJjLWI1YzgtODMwZGE0ZDhiYzM4';
 const SISU_TEAM  = 48078;
 const SISU_AGENT = 225028;
 const SISU_BASE  = 'https://staging.sisu.co/api';
@@ -558,16 +556,27 @@ const SISU_BASE  = 'https://staging.sisu.co/api';
 // Internal proxy — routes through /api/proxy to avoid CORS restrictions
 const PROXY_BASE = '/api/proxy?url=';
 
-const USERS = {
-  'adam@enchantaz.com':  { pass:'adam123',   role:'agent',      name:'Adam Prather', initials:'AP', title:'Agent / Broker', sisuId:225028 },
-  'admin@enchantaz.com': { pass:'leader123', role:'leadership', name:'Adam Prather', initials:'AP', title:'Broker / Owner',  sisuId:225028 },
-};
-
+let sessionToken = localStorage.getItem('enchant_token');
 let currentUser = null;
 let currentRole = 'agent';
 let dateRange   = 'month';
 let cache = { fub:{}, sisu:{} };
 let allLeads = [];
+
+// Auto-restore session on page load
+if (sessionToken) {
+  fetch('/api/auth/me', {headers:{Authorization:'Bearer '+sessionToken}})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(({user})=>{
+      currentUser=user; currentRole=user.role;
+      document.getElementById('login-screen').style.display='none';
+      document.getElementById('app').style.display='block';
+      // initApp will be available once the page finishes loading
+      document.addEventListener('DOMContentLoaded',()=>initApp(),{once:true});
+      if(document.readyState!=='loading') initApp();
+    })
+    .catch(()=>{sessionToken=null;localStorage.removeItem('enchant_token');});
+}
 
 // ─── DATE HELPERS ─────────────────────────────────────────────────────────────
 function dates() {
@@ -591,19 +600,26 @@ function selectRole(r,btn) {
   document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
-function doLogin() {
+async function doLogin() {
   const email=document.getElementById('login-email').value.trim().toLowerCase();
   const pass=document.getElementById('login-pass').value;
-  const u=USERS[email], err=document.getElementById('login-error');
-  if (!u||u.pass!==pass){err.style.display='block';return;}
-  err.style.display='none';
-  currentUser={...u,email}; currentRole=u.role;
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').style.display='block';
-  initApp();
+  const err=document.getElementById('login-error');
+  try {
+    const res=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
+    if(!res.ok){err.style.display='block';return;}
+    const {token,user}=await res.json();
+    sessionToken=token; localStorage.setItem('enchant_token',token);
+    currentUser=user; currentRole=user.role;
+    err.style.display='none';
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    initApp();
+  } catch(e){err.style.display='block';}
 }
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('login-screen').style.display!=='none')doLogin();});
 function doLogout() {
+  fetch('/api/auth/logout',{method:'POST',headers:{Authorization:'Bearer '+sessionToken}}).catch(()=>{});
+  sessionToken=null; localStorage.removeItem('enchant_token');
   currentUser=null;
   document.getElementById('app').style.display='none';
   document.getElementById('login-screen').style.display='flex';
@@ -630,15 +646,14 @@ async function proxyFetch(url, opts={}) {
 }
 
 async function fubFetch(endpoint, params='') {
-  const b64 = btoa(FUB_KEY+':');
   const r = await proxyFetch('https://api.followupboss.com/v1'+endpoint+params, {
-    headers:{'Authorization':'Basic '+b64,'Accept':'application/json','X-System':'EnchantDashboard','X-System-Key':FUB_KEY}
+    headers:{'Accept':'application/json'}
   });
   return r.json();
 }
 
 async function sisuFetch(endpoint, body=null, method='POST') {
-  const opts = {method, headers:{'Authorization':SISU_AUTH,'Content-Type':'application/json','Accept':'application/json'}};
+  const opts = {method, headers:{'Content-Type':'application/json','Accept':'application/json'}};
   if (body) opts.body = JSON.stringify(body);
   const r = await proxyFetch(SISU_BASE+endpoint, opts);
   return r.json();

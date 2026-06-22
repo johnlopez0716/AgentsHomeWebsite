@@ -18,12 +18,24 @@ router.all("/proxy", async (req, res) => {
     return;
   }
 
+  const targetStr = target.toString();
   const forwardHeaders: Record<string, string> = {
     Accept: "application/json",
   };
 
-  const auth = req.headers["authorization"];
-  if (auth) forwardHeaders["Authorization"] = auth;
+  // Inject server-side auth based on target API
+  if (targetStr.includes("followupboss.com")) {
+    const fubKey = process.env.FUB_API_KEY;
+    if (fubKey) {
+      forwardHeaders["Authorization"] =
+        "Basic " + Buffer.from(fubKey + ":").toString("base64");
+      forwardHeaders["X-System"] = "EnchantDashboard";
+      forwardHeaders["X-System-Key"] = fubKey;
+    }
+  } else if (targetStr.includes("sisu.co")) {
+    const sisuAuth = process.env.SISU_AUTH;
+    if (sisuAuth) forwardHeaders["Authorization"] = sisuAuth;
+  }
 
   const contentType = req.headers["content-type"];
   if (contentType) forwardHeaders["Content-Type"] = contentType;
@@ -39,7 +51,7 @@ router.all("/proxy", async (req, res) => {
   }
 
   try {
-    const upstream = await fetch(target.toString(), fetchOpts);
+    const upstream = await fetch(targetStr, fetchOpts);
     const body = await upstream.text();
     res.status(upstream.status);
     res.setHeader(
@@ -48,7 +60,7 @@ router.all("/proxy", async (req, res) => {
     );
     res.send(body);
   } catch (err) {
-    req.log.error({ err, target: target.toString() }, "proxy fetch failed");
+    req.log.error({ err, target: targetStr }, "proxy fetch failed");
     res.status(502).json({ error: "Failed to reach upstream" });
   }
 });
