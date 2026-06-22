@@ -1,5 +1,5 @@
 kind = "web"
-previewPath = "/"
+previewPath = "/__enchant-vite-dev"
 title = "Enchant Dashboard"
 version = "1.0.0"
 id = "artifacts/enchant-dashboard"
@@ -11,7 +11,7 @@ version = "1.0.0"
 
 [[services]]
 name = "web"
-paths = [ "/" ]
+paths = ["/__enchant-vite-dev"]
 localPort = 24180
 
 [services.development]
