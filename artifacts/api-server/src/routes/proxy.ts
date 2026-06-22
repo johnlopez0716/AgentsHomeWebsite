@@ -19,14 +19,16 @@ router.all("/proxy", async (req, res) => {
   }
 
   const targetStr = target.toString();
+  // Client Authorization is never forwarded — server injects its own credentials per API
   const forwardHeaders: Record<string, string> = {
     Accept: "application/json",
   };
 
-  // Inject server-side auth based on target API
   if (targetStr.includes("followupboss.com")) {
     const fubKey = process.env.FUB_API_KEY;
-    if (fubKey) {
+    if (!fubKey) {
+      req.log.warn("FUB_API_KEY not set — followupboss.com request will be unauthenticated");
+    } else {
       forwardHeaders["Authorization"] =
         "Basic " + Buffer.from(fubKey + ":").toString("base64");
       forwardHeaders["X-System"] = "EnchantDashboard";
